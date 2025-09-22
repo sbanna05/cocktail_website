@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocktail Shop</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/shop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.7.0/remixicon.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="shortcut icon" href="images/cocktail_line.png"/>
+</head>
+<body>
+    
+<section class="header">
+      <nav class="nav">
+        <a href="#" class="nav_logo">CocktailHeaven</a>
+        <div class="nav_menu" id="nav_menu">
+          <ul class="nav_list">
+            <li class="nav_item"><a href="webpage.html#home" class="nav_link">Home</a></li>
+            <li class="nav_item"><a href="webpage.html#favourites" class="nav_link">Favourites</a></li>
+            <li class="nav_item"><a href="webpage.html#signatures" class="nav_link">Signature Drinks</a></li>
+            <li class="nav_item"><a href="#shop" class="nav_link">Shop</a></li>
+            <li class="nav_item"><a href="webpage.html#contact-us" class="nav_link">Contact Us</a></li>
+          </ul>
+         
+          <div class="nav_close" id="nav-close">
+                  <i class="ri-close-line"></i>
+          </div>
+
+          <div class="nav_dark">
+               <span class="change_theme_name">Dark Mode</span>
+               <i class="ri-moon-line change_theme" id="theme-button"></i>
+          </div>
+        </div>
+          
+          <div class="shop_actions">
+            <a href="shop.html#cart" class="nav_cart">
+              <i class="ri-shopping-cart-line"></i>
+              <span class="cart_count">0</span>
+            </a>
+            <a href="shop.html#profile" class="nav_profile">
+              <i class="ri-user-line"></i>
+              <span class="profile_name">StanczAnna</span>
+            </a>
+        </div>        
+
+        <div class="nav_toggle" id="nav-toggle">
+               <i class="ri-menu-fill"></i>
+        </div>
+      </nav>
+</section>
+
+    <div id="shop">
+     <div class="shop_header">
+        <div class="shop_title section_title">CocktailHeaven Shop</div>
+        <div class="search_bar">
+          <input type="text" class="search_input" placeholder="">
+          <button class="search_button"><i class="ri-search-line"></i></button>
+        </div>
+     </div>
+    
+    <div class="beverages">
+      <h2 class="section_subtitle">Beverages</h2>
+      <div class="alcoholic_drinks">
+        <div class="drink_cards_container">
+          <!-- Drink cards will be dynamically inserted here -->
+        </div>
+       
+      </div>
+      <div class="non_alcoholic_drinks"></div>
+    </div>
+     <div class="essentials">
+    <h2 class="section_subtitle">Bar Essentials</h2>
+    <div class="bar_tools_container">
+      </div>
+    </div>
+  </div>
+  
+  </section>
+
+
+  <a href="#" class="scrollup" id="scroll-up">
+      <i class="ri-arrow-up-line"></i>
+  </a>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    const drinks = [
+  { name: 'Grey Goose', price: 10, img: '' },
+  { name: 'Jack Daniels', price: 12, img: '' },
+  { name: 'Tullamore Dew', price: 15, img: '' },
+  { name: 'Bushmills', price: 9, img: '' },
+  { name: 'Jameson', price: 11, img: '' },
+  { name: 'Absolut', price: 8, img: '' },
+  { name: 'Beefeater', price: 14, img: '' },
+  { name: 'Hendrick\'s', price: 18, img: '' },
+  { name: 'Bacardi', price: 10, img: '' },
+  { name: 'Captain Morgan', price: 13, img: '' },
+  { name: 'Malibu', price: 12, img: '' },
+  { name: 'Cointreau', price: 20, img: '' },
+  { name: 'Baileys', price: 15, img: '' },
+  { name: 'Kahlúa', price: 14, img: '' },
+  { name: 'Campari', price: 16, img: '' },
+  { name: 'Aperol', price: 15, img: '' },
+  { name: 'Martini Rosso', price: 10, img: '' },
+  { name: 'Martini Bianco', price: 10, img: '' },
+  { name: 'Prosecco', price: 25, img: '' },
+  { name: 'Moët & Chandon', price: 50, img: '' }
+];
+
+const container = document.querySelector('.drink_cards_container');
+
+drinks.map(drink => {
+  const card = document.createElement('div');
+  card.classList.add('drink_card');
+  card.innerHTML = `
+    <img src="assets/images/${drink.img}" alt="${drink.name}" class="drink_img">
+    <div class="drink_info">
+      <h3 class="drink_name">${drink.name}</h3>
+      <p class="drink_price">${drink.price}$</p>
+    </div>
+    <button class="add_to_cart">Add to Cart +</button>
+  `;
+  container.appendChild(card);
+});
+
+
+essentials = [
+  { name: 'Cocktail Shaker', price: 25, img: 'shaker.jpg' },
+  { name: 'Mixing Glass', price: 20, img: 'mixing_glass.jpg' },
+  { name: 'Muddler', price: 10, img: 'muddler.jpg' },
+  { name: 'Strainer', price: 15, img: 'strainer.jpg' },
+  { name: 'Spoon', price: 8, img: 'spoon.jpg' },
+  { name: 'Ice Scoop', price: 12, img: 'ice_scoop.jpg' },
+  { name: 'Old Fashioned Glasses', price: 30, img: 'old_fashioned_glasses.jpg' },
+  { name: 'Martini Glasses', price: 35, img: 'martini_glasses.jpg' },
+  { name: 'Highball Glasses', price: 28, img: 'highball_glasses.jpg' },
+]
+
+essentialsContainer = document.querySelector('.bar_tools_container');
+essentials.map(tool => {
+  const card = document.createElement('div');
+  card.classList.add('tool_card');
+  card.innerHTML = `
+    <img src="assets/images/${tool.img}" alt="${tool.name}" class="tool_img">
+    <div class="tool_info">
+      <h3 class="tool_name">${tool.name}</h3>
+      <p class="tool_price">${tool.price}$</p>
+    </div>
+    <button class="add_to_cart">Add to Cart +</button>
+  `;
+  essentialsContainer.appendChild(card);
+});
+
+// Kereső input eseménykezelő
+  document.querySelector(".search_input").addEventListener("input", function () {
+    const filter = this.value.toUpperCase(); // keresett szöveg
+    const cards = document.querySelectorAll(".drink_card"); // összes ital kártya
+
+    cards.forEach(card => {
+      const name = card.querySelector(".drink_name").textContent.toUpperCase();
+      if (name.includes(filter)) {
+        card.style.display = ""; // látható marad
+      } else {
+        card.style.display = "none"; // elrejtjük
+      }
+    });
+
+    const toolCards = document.querySelectorAll(".tool_card"); // összes eszköz kártya
+    toolCards.forEach(card => {
+      const name = card.querySelector(".tool_name").textContent.toUpperCase();
+      if (name.includes(filter)) {
+        card.style.display = ""; // látható marad
+      } else {
+        card.style.display = "none"; // elrejtjük
+      }
+    });
+  });
+
+  const cartCount = document.querySelector('.cart_count');
+  const addToCartButtons = document.querySelectorAll('.add_to_cart');
+  let count = 0;
+  addToCartButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      count++;
+      cartCount.textContent = count;
+    });
+  });
+  </script>
+</body>
+</html>

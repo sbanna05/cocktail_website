@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cocktail Heaven</title>
+    <link rel="shortcut icon" href="assets/images/cocktail_line.png"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.7.0/remixicon.css">
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+ </head>
+  <body>
+    <section class="header">
+      <nav class="nav">
+        <a href="#" class="nav_logo">CocktailHeaven</a>
+        <div class="nav_menu" id="nav_menu">
+          <ul class="nav_list">
+            <li class="nav_item"><a href="#home" class="nav_link">Home</a></li>
+            <li class="nav_item"><a href="#favorites" class="nav_link">Favourites</a></li>
+            <li class="nav_item"><a href="#signatures" class="nav_link">Signature Drinks</a></li>
+            <li class="nav_item"><a href="#shop" class="nav_link">Shop</a></li>
+            <li class="nav_item"><a href="#recipes" class="nav_link">Recipes</a></li>
+
+            <li class="nav_item"><a href="#contact-us" class="nav_link">Contact Us</a></li>
+          </ul>
+         
+          <div class="nav_close" id="nav-close">
+                  <i class="ri-close-line"></i>
+          </div>
+
+          <div class="nav_dark">
+               <span class="change_theme_name">Dark Mode</span>
+               <i class="ri-moon-line change_theme" id="theme-button"></i>
+          </div>
+
+          <div class="sign_in_icon">
+            <span class="sign_in_name">Sign In</span>
+            <i class="ri-login-box-line" id="sign-in-button"></i>
+          </div>
+
+        </div>        
+
+        <div class="nav_toggle" id="nav-toggle">
+               <i class="ri-menu-fill"></i>
+        </div>
+      </nav>
+
+        <section class="sign_in_sign_up_container">
+  
+             <div class="sign_in_sign_up_overlay">
+                <div class="sign_in_content">
+                  <h1 class="sign_in_title">Sign In</h1>
+                  <form class="sign_in_form">
+                    <input type="text" class="sign_in_input" placeholder="Username" required>
+                    <input type="password" class="sign_in_input" placeholder="Password" required>
+                    
+                    <div class="remember_forgot">
+                          <label class="remember_me_label"> <input type="checkbox">Remember me</label>
+                          <a href="#">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="sign_in_btn">Sign In</button>
+      
+                  </form>
+                  <p class="sign_in_info">Don't have an account? <a href="#" id="sign-in-link">Sign Up</a></p>
+                  <div class="sign_in_close">
+                    <i class="ri-close-line"></i>
+                  </div>
+                </div>
+    
+                <div class="sign_up_content">
+                  <h1 class="sign_up_title">Sign Up</h1>
+                  <form class="sign_up_form">
+                    <input type="text" class="sign_up_input" placeholder="Username" required>
+                    <input type="email" class="sign_up_input" placeholder="Email" required>
+                    <input type="password" class="sign_up_input" placeholder="Password" required>
+                    <button type="submit" class="sign_up_btn">Sign Up</button>
+                  </form>
+                  <p class="sign_up_info">Already have an account? <a href="#" id="sign-up-link">Sign In</a></p>
+                  <div class="sign_up_close">
+                    <i class="ri-close-line"></i>
+                  </div>
+                </div>
+             </div>
+        </section>
+      
+
+    </section>
+ <main class="main">
+  <!--p><section id="sign-in-container"></section></!--p-->
+<section id="home">
+  <div class="home_container container grid">
+    
+    <h1 class="home_title section_title">Welcome to Cocktail Heaven</h1>
+    
+    <div class="home_row">
+      <div class="home_picture">
+        <img src="assets/images/home_picture_2.png" alt="home_picture" class="home_image">
+      </div>
+
+      <div class="home_content">
+        <p class="home_info">Mixing flavours, crafting experiences. Discover our finest cocktails & essentials.</p>
+        <div class="home_links">
+          <a href="#favorites" class="home_link">Explore Favourites</a>
+          <a href="#shop" class="home_link">Shop Now</a>
+        </div>
+        <p class="home_info">We believe a great cocktail is more than just a drink – it's an experience. 
+          From timeless classics to bold new creations, we craft with passion.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+  <section id="favorites" class="grid fav_section_container">
+    <div class="fav_title section_title">This Week's Favourites</div>
+  <div class="favourites_swiper swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide fav_card" id="drink_1">
+        <div class="fav_card_bg">
+          <span class="fav_card_title">Reverse Cherry Manhattan</span>
+        </div>
+        <div class="fav_card_ingredients">
+          <ul class="fav_card_ingredients_list">
+            <li class="fav_card_ingredient_list_item">2 oz Rye Whiskey</li>
+            <li class="fav_card_ingredient_list_item">1 oz Sweet Vermouth</li>
+            <li class="fav_card_ingredient_list_item">1/2 oz Cherry Liqueur</li>
+            <li class="fav_card_ingredient_list_item">2 dashes Angostura Bitters</li>
+            <li class="fav_card_ingredient_list_item">Garnish: Maraschino Cherry</li>
+          </ul>
+        </div>
+        <img class="fav_card_image" src="assets/images/reverse_cherry_manhattan.png" alt="reverse_cherry_manhattan" width="150" height="150">
+      </div>
+      
+      <div class="swiper-slide fav_card" id="drink_2">
+        <div class="fav_card_bg">
+          <span class="fav_card_title">Mojito</span>
+        </div>
+        <div class="fav_card_ingredients">
+          <ul class="fav_card_ingredients_list">
+            <li class="fav_card_ingredient_list_item">2 oz White Rum</li>
+            <li class="fav_card_ingredient_list_item">1 oz Lime Juice</li>
+            <li class="fav_card_ingredient_list_item">2 tsp Sugar</li>
+            <li class="fav_card_ingredient_list_item">Mint Leaves</li>
+            <li class="fav_card_ingredient_list_item">Club Soda</li>
+          </ul>
+        </div>
+        <img class="fav_card_image" src="assets/images/mojito.webp" alt="mojito" width="250" height="250">
+      </div>
+      <div class="swiper-slide fav_card" id="drink_3">
+        <div class="fav_card_bg">
+          <span class="fav_card_title">Old Fashioned</span>
+        </div>
+        <div class="fav_card_ingredients">
+          <ul class="fav_card_ingredients_list">
+            <li class="fav_card_ingredient_list_item">2 oz Bourbon or Rye Whiskey</li>
+            <li class="fav_card_ingredient_list_item">1 Sugar Cube</li>
+            <li class="fav_card_ingredient_list_item">2 dashes Angostura Bitters</li>
+            <li class="fav_card_ingredient_list_item">Orange Peel</li>
+          </ul>
+        </div>
+        <img class="fav_card_image" src="assets/images/old_fashioned.webp" alt="old_fashioned" width="150" height="150">
+      </div>
+      <div class="swiper-slide fav_card" id="drink_4">
+        <div class="fav_card_bg">
+          <span class="fav_card_title">Aviation</span>
+      </div>
+        <div class="fav_card_ingredients">
+          <ul class="fav_card_ingredients_list">
+            <li class="fav_card_ingredient_list_item">2 oz Gin</li>
+            <li class="fav_card_ingredient_list_item">1/2 oz Maraschino Liqueur</li>
+            <li class="fav_card_ingredient_list_item">1/2 oz Crème de Violette</li>
+            <li class="fav_card_ingredient_list_item">3/4 oz Lemon Juice</li>
+          </ul>
+        </div>
+        <img class="fav_card_image" src="assets/images/aviation.webp" alt="aviation" width="150" height="150">
+      </div>
+      <div class="swiper-slide fav_card" id="drink_5">
+      
+        <div class="fav_card_bg">
+          <span class="fav_card_title">Nutty Alexander</span>
+      </div>
+        <div class="fav_card_ingredients">
+          <ul class="fav_card_ingredients_list">
+            <li class="fav_card_ingredient_list_item">1 oz Cognac</li>
+            <li class="fav_card_ingredient_list_item">1 oz Crème de Cacao</li>
+            <li class="fav_card_ingredient_list_item">1 oz Heavy Cream</li>
+            <li class="fav_card_ingredient_list_item">Grated Nutmeg for garnish</li>
+          </ul>
+        </div>
+        <img class="fav_card_image" src="assets/images/nutty_alexander.webp" alt="nutty_alexander" width="150" height="150">
+    </div>
+
+    
+      <div class="swiper-slide fav_card" id="drink_6">
+        <div class="fav_card_bg">
+          <span class="fav_card_title">Boulevardier</span>
+        </div>
+        <div class="fav_card_ingredients">
+          <ul class="fav_card_ingredients_list">
+            <li class="fav_card_ingredient_list_item">1 oz Bourbon</li>
+            <li class="fav_card_ingredient_list_item">1 oz Campari</li>
+            <li class="fav_card_ingredient_list_item">1 oz Sweet Vermouth</li>
+            <li class="fav_card_ingredient_list_item">Orange Peel for garnish</li>
+          </ul>
+        </div>
+        <img class="fav_card_image" src="assets/images/boulevardier.webp" alt="Boulevardier" width="150" height="150">
+      </div>
+  
+    </div>
+
+    
+  </section>
+
+<section id="signatures" class="grid signatures_section_container">
+    <div class="signatures_title section_title">Discover Our Signature Drinks</div>
+  <div class="signatures_swiper swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide signature_card" id="card_1">
+        <div class="signature_card_bg">
+          <span class="signature_card_title">Reverse Cherry Manhattan</span>
+        </div>
+        <div class="signature_card_ingredients">
+          <ul class="signature_card_ingredients_list">
+            <li class="signature_card_ingredient_list_item">2 oz Rye Whiskey</li>
+            <li class="signature_card_ingredient_list_item">1 oz Sweet Vermouth</li>
+            <li class="signature_card_ingredient_list_item">1/2 oz Cherry Liqueur</li>
+            <li class="signature_card_ingredient_list_item">2 dashes Angostura Bitters</li>
+            <li class="signature_card_ingredient_list_item">Garnish: Maraschino Cherry</li>
+          </ul>
+        </div>
+        <img class="signature_card_image" src="assets/images/reverse_cherry_manhattan.png" alt="reverse_cherry_manhattan" width="150" height="150">
+      </div>
+      
+      <div class="swiper-slide signature_card" id="card_2">
+        <div class="signature_card_bg">
+          <span class="signature_card_title">Mojito</span>
+        </div>
+        <div class="signature_card_ingredients">
+          <ul class="signature_card_ingredients_list">
+            <li class="signature_card_ingredient_list_item">2 oz White Rum</li>
+            <li class="signature_card_ingredient_list_item">1 oz Lime Juice</li>
+            <li class="signature_card_ingredient_list_item">2 tsp Sugar</li>
+            <li class="signature_card_ingredient_list_item">Mint Leaves</li>
+            <li class="signature_card_ingredient_list_item">Club Soda</li>
+          </ul>
+        </div>
+        <img class="signature_card_image" src="assets/images/mojito.webp" alt="mojito" width="250" height="250">
+      </div>
+      <div class="swiper-slide signature_card" id="card_3">
+        <div class="signature_card_bg">
+          <span class="signature_card_title">Old Fashioned</span>
+        </div>
+        <div class="signature_card_ingredients">
+          <ul class="signature_card_ingredients_list">
+            <li class="signature_card_ingredient_list_item">2 oz Bourbon or Rye Whiskey</li>
+            <li class="signature_card_ingredient_list_item">1 Sugar Cube</li>
+            <li class="signature_card_ingredient_list_item">2 dashes Angostura Bitters</li>
+            <li class="signature_card_ingredient_list_item">Orange Peel</li>
+          </ul>
+        </div>
+        <img class="signature_card_image" src="assets/images/old_fashioned.webp" alt="old_fashioned" width="150" height="150">
+      </div>
+      <div class="swiper-slide signature_card" id="card_4">
+        <div class="signature_card_bg">
+          <span class="signature_card_title">Aviation</span>
+      </div>
+        <div class="signature_card_ingredients">
+          <ul class="signature_card_ingredients_list">
+            <li class="signature_card_ingredient_list_item">2 oz Gin</li>
+            <li class="signature_card_ingredient_list_item">1/2 oz Maraschino Liqueur</li>
+            <li class="signature_card_ingredient_list_item">1/2 oz Crème de Violette</li>
+            <li class="signature_card_ingredient_list_item">3/4 oz Lemon Juice</li>
+          </ul>
+        </div>
+        <img class="signature_card_image" src="assets/images/aviation.webp" alt="aviation" width="150" height="150">
+      </div>
+      <div class="swiper-slide signature_card" id="card_5">
+      
+        <div class="signature_card_bg">
+          <span class="signature_card_title">Nutty Alexander</span>
+      </div>
+        <div class="signature_card_ingredients">
+          <ul class="signature_card_ingredients_list">
+            <li class="signature_card_ingredient_list_item">1 oz Cognac</li>
+            <li class="signature_card_ingredient_list_item">1 oz Crème de Cacao</li>
+            <li class="signature_card_ingredient_list_item">1 oz Heavy Cream</li>
+            <li class="signature_card_ingredient_list_item">Grated Nutmeg for garnish</li>
+          </ul>
+        </div>
+        <img class="signature_card_image" src="assets/images/nutty_alexander.webp" alt="nutty_alexander" width="150" height="150">
+    </div>
+
+    
+      <div class="swiper-slide signature_card" id="card_6">
+        <div class="signature_card_bg">
+          <span class="signature_card_title">Boulevardier</span>
+        </div>
+        <div class="signature_card_ingredients">
+          <ul class="signature_card_ingredients_list">
+            <li class="signature_card_ingredient_list_item">1 oz Bourbon</li>
+            <li class="signature_card_ingredient_list_item">1 oz Campari</li>
+            <li class="signature_card_ingredient_list_item">1 oz Sweet Vermouth</li>
+            <li class="signature_card_ingredient_list_item">Orange Peel for garnish</li>
+          </ul>
+        </div>
+        <img class="signature_card_image" src="assets/images/boulevardier.webp" alt="Boulevardier" width="150" height="150">
+      </div>
+  
+    </div>
+  </section>
+  
+  <section id="shop" class="container shop_container grid">
+    <div class="shop_title section_title">Discover Our Latest Items</div>
+    
+   <div class="shop_items">
+      <a href="shop.html" class="shop_item">
+      <img src="assets/images/beverages.jpg" alt="Beverages">
+      <span class="shop_label">Beverages</span>
+    </a>
+    <a href="shop.html" class="shop_item">
+      <img src="assets/images/essentials.jpg" alt="Essentials">
+      <span class="shop_label">Essentials</span>
+    </a>
+   </div class="shop_items">
+  </section>
+
+  <section class="recipes container grid">
+    <div class="recipes_title section_title">Explore Our Cocktail Recipes</div>
+    <div class="recipes_cards">
+      <div class="recipe_card">
+        <img src="assets/images/aviation.webp" alt="Aviation" class="recipe_image" width="150" height="150">
+        <h3 class="recipe_name">Aviation</h3>
+        <p class="recipe_description">A classic cocktail with gin, maraschino liqueur, crème de violette, and lemon juice.</p>
+      </div>
+      
+      <div class="recipe_card">
+        <img src="assets/images/old_fashioned.webp" alt="Old Fashioned" class="recipe_image" width="150" height="150">
+        <h3 class="recipe_name">Old Fashioned</h3>
+        <p class="recipe_description">A timeless cocktail made with whiskey, sugar, bitters, and a twist of citrus.</p>
+      <div class="recipe_card">
+        <img src="assets/images/boulevardier.webp" alt="Boulevardier" class="recipe_image" width="150" height="150">
+        <h3 class="recipe_name">Boulevardier</h3>
+        <p class="recipe_description">A classic  cocktail combining Bourbon, Campari, and sweet vermouth for a bold flavor.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact-us" class="container contact-us_container grid">
+    <div class="contact-us_title section_title">Feel Free To Contact Us</div>
+
+    <div class="contact-us_info">
+      <p class="contact-us_info_title">General Contact Informations</p>
+      <p  class="contact-us_info_p">Email: basic_email@email.com</p>
+      <p class="contact-us_info_p">Phone: +00 001 0012</p>
+      <p class="contact-us_info_p">Address: 123 Cocktail St, Mixology City, CO 12345</p>
+    </div>
+     <p class="form_info">If you have any questions or feedback, feel free to reach out to us!</p>
+    <form class="contact-us_form">
+      <input type="text" class="contact-us_input" placeholder="Your Name" required>
+      <input type="email" class="contact-us_input" placeholder="Your Email" required>
+      <input type="phonenumber" class="contact-us_input" placeholder="Your Phonenumber" required>
+      <textarea class="contact-us_textarea" placeholder="Your Message" required></textarea>
+      <button type="submit" class="contact-us_button">Send Message</button>
+    </form>
+  </section>
+  </main> 
+
+  <footer id="footer" class="footer_container grid">
+      <div class="footer_logo">
+        <a href="#" class="footer_logo">CocktailHeaven</a>
+      </div>
+      <div class="footer_links">
+        <ul class="footer_links_list">
+          <li class="footer_links_item"><a href="#home" class="footer_links_link">Home</a></li>
+          <li class="footer_links_item"><a href="#favorites" class="footer_links_link">Favourites</a></li>
+          
+          <li class="footer_links_item"><a href="#singatures" class="footer_links_link">Signature Drinks</a></li>
+          <li class="footer_links_item"><a href="#shop" class="footer_links_link">Shop</a></li>
+          <li class="footer_links_item"><a href="#contact-us" class="footer_links_link">Contact Us</a></li>
+        </ul>
+      </div>
+    <div class="footer_social">
+      <a href="https://www.facebook.com" class="footer_social_link"><i class="ri-facebook-fill"></i></a>
+      <a href="https://www.instagram.com" class="footer_social_link"><i class="ri-instagram-fill"></i></a>
+      <a href="https://www.twitter.com" class="footer_social_link"><i class="ri-twitter-x-fill"></i></a>
+    </div>
+
+    <div class="footer_copy">
+      <p>&copy; 2025 Cocktail Website. All rights reserved.</p>
+    </div>
+  </footer>
+   
+ 
+<!--========== SCROLL UP ==========-->
+  <a href="#" class="scrollup" id="scroll-up">
+      <i class="ri-arrow-up-line"></i>
+  </a>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
