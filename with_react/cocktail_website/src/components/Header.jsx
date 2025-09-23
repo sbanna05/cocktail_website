@@ -1,0 +1,64 @@
+import React from 'react'
+import { useState } from "react";
+import SignInContainer from './SignInContainer.jsx';
+import SignUpContainer from './SignUpContainer.jsx';
+
+function Header() {
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+    const [showSignIn, setShowSignIn] = useState(false);
+    const [showSignUp, setShowSignUp] = useState(false);
+
+    const toggleMenu = () => setMenuOpen(!menuOpen);
+
+    const toggleTheme = () => {
+        const themes = ['light', 'dark', 'accessible'];
+        const nextTheme = themes[(themes.indexOf(theme) + 1) % themes.length];
+        setTheme(nextTheme);
+        localStorage.setItem('theme', nextTheme);
+    };
+    return (
+        <section className={`header ${theme}-theme`}>
+            <nav className="nav">
+                <a href="#home" className="nav_logo">CocktailHeaven</a>
+
+                <div className={`nav_menu ${menuOpen ? 'show-menu' : ''}`}>
+                    <ul className="nav_list">
+                        <li className="nav_item"><a href="#home" className="nav_link">Home</a></li>
+                        <li className="nav_item"><a href="#favorites" className="nav_link">Favourites</a></li>
+                        <li className="nav_item"><a href="#signatures" className="nav_link">Signature Drinks</a></li>
+                        <li className="nav_item"><a href="#shop" className="nav_link">Shop</a></li>
+                        <li className="nav_item"><a href="#recipes" className="nav_link">Recipes</a></li>
+                        <li className="nav_item"><a href="#contact-us" className="nav_link">Contact Us</a></li>
+                    </ul>
+
+                    <div className="nav_close" onClick={toggleMenu}>
+                        <i className="ri-close-line"></i>
+                    </div>
+
+                    <div className="nav_dark" onClick={toggleTheme}>
+                        <span className="change_theme_name">
+                            {theme === 'light' ? 'Dark Mode' : theme === 'dark' ? 'Accessible Mode' : 'Light Mode'}
+                        </span>
+                        <i className={`ri-${theme === 'light' ? 'moon' : theme === 'dark' ? 'eye' : 'sun'}-line change_theme`}></i>
+                    </div>
+
+                    <div className="sign_in_icon" onClick={() => setShowSignIn(true)}>
+                        <span className="sign_in_name">Sign In</span>
+                        <i className="ri-login-box-line"></i>
+                    </div>
+                </div>
+
+                <div className="nav_toggle" onClick={toggleMenu}>
+                    <i className="ri-menu-fill"></i>
+                </div>
+            </nav>
+
+            {showSignIn && <SignInContainer active={showSignIn} close={() => setShowSignIn(false)} switchToSignUp={() => { setShowSignIn(false); setShowSignUp(true); }} />}
+            {showSignUp && <SignUpContainer active={showSignUp} close={() => setShowSignUp(false)} switchToSignIn={() => { setShowSignUp(false); setShowSignIn(true); }} />}
+    
+        </section>
+    )
+}
+
+export default Header
