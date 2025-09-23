@@ -4,7 +4,7 @@ function Home() {
   
     return (
       <>
-        
+        <h2>Welcome to Cocktail Heaven</h2>
       </>
     );
   
