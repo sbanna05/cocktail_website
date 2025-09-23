@@ -6,6 +6,7 @@ import Shop from './pages/Shop'
 import Contact from './pages/Contact'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import ScrollUp from './components/ScrollUp'
 //import './assets/css/style.css'
 import './assets/css/index.css'
 
@@ -18,10 +19,14 @@ function App() {
     <Header />
      <main>
         <Home />
+        <Favourites/>
+
 
         <Signatures />
         <Shop />
         <Contact />
+
+      <ScrollUp/>
       </main>
       <Footer/>
     </>

@@ -228,7 +228,7 @@ main {
 }*/
 
 .header {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
@@ -511,6 +511,9 @@ main {
 }
 /*========================================*/
 /*=============== HOME ===============*/
+#home{
+    padding-top: calc(var(--header-height)*3);
+}
 .home_container {
   padding: 3rem 1.5rem;
 }
@@ -600,4 +603,221 @@ main {
     margin: 0 auto;
     text-align: center;
   }
+}
+
+/*==============================7*/
+.fav_section_container, .signatures_section_container {
+  padding-block: calc(var(--header-height) + 2rem);
+  background-color: var(--deep-ruby);
+  padding: 1.5rem 1.5rem;
+  /*height: calc(60vh - var(--header-height));*/
+  height: auto;
+  padding-block-end: 3rem;
+  box-shadow: #2c2c2d 0px 4px 8px;
+  display: grid;
+  overflow: visible;
+}
+
+#signatures {
+margin-block: var(--header-height);
+}
+
+.fav_title, .signatures_title {
+  font-size: var(--h1-font-size);
+  font-weight: var(--font-semi-bold);
+  color: var(--secondary-color);
+  text-align: center;      /* középre */
+  margin-bottom: 2rem;     /* legyen tér a carousel előtt */
+}
+
+.fav_card, .signature_card{
+  background-color: var(--card-bg);
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: var(--border-radius-card);
+}
+
+@media screen and (max-width: 768px) {
+  .fav_card, .signature_card {
+    width: 200px;
+    height: 200px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .fav_card, .signature_card {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+.fav_card_bg, .signature_card_bg {
+  background-color: #ddd;
+  border-radius: var(--border-radius-card);
+  box-shadow: inset 10px 10px 10px #999,
+              inset -10px -10px 10px #fff;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s, box-shadow 0.8s;
+ aspect-ratio: 0.5;
+}
+.fav_card_bg .fav_card_title,
+ .signature_card_bg .signature_card_title {
+      position: absolute;
+      bottom: 20px;
+      left: 30px;
+      color: var(--deep-ruby);
+      font-weight: bold;
+      font-size: 1.2rem;
+      transition: transform 0.8s ease;
+      z-index: 2;
+}
+
+
+.fav_card:hover img,
+.signature_card:hover img {
+      transform: translateY(-50%) scale(1.1);
+      z-index: 2;
+    }
+.fav_card:hover .fav_card_bg span,
+.signature_card:hover .signature_card_bg span {
+      transform: translateX(80deg) translateY(-10px) scale(1.1);
+    }
+.fav_card:hover .fav_card_ingredients,
+.signature_card:hover .signature_card_ingredients {
+  visibility: visible;
+  transform: translateY(30%);
+}
+/*
+.fav_card:hover .fav_card_title {
+  transform: translateY(-10px)  scale(1.5);
+  z-index: 5;
+}*/
+
+.fav_card:hover .fav_card_title,
+.signature_card:hover .signature_card_title {
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+  color: var(--deep-ruby);
+  font-weight: bold;
+  font-size: 1.2rem;
+  transform: rotateY(-70deg) scale(3); /* <-- ugyanakkora, de ellentétes */
+  transform-origin: bottom left;
+  transition: transform 0.8s ease;
+}
+
+.fav_card:hover .fav_card_bg,
+.signature_card:hover .signature_card_bg {
+ transform: rotateX(70deg);
+  box-shadow: 12px 24px 24px rgba(0,0,0,0.4);
+}
+
+
+.fav_card_image,
+.signature_card_image {
+  position: absolute;
+  background-repeat: none;
+  width: 50%;
+  height: 50%;
+  inset: 50%;
+  top: 25%;
+  left: 25%;
+  transition: transform 0.8s ease;
+  z-index: 5;
+}
+.fav_card_ingredients,
+.signature_card_ingredients {
+      position: absolute;
+      left: 20%;
+      right: 20%;
+      bottom: -.5rem;
+      color: var(--grey-color-dark);
+      font-size: 0.9rem;
+      background-color: rgba(199, 54, 89, 0.6);
+     /* backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);*/
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      visibility: hidden;
+      transition: transform 0.8s ease;
+      z-index: 2000;
+}
+.fav_card_ingredients_list,
+.signature_card_ingredients_list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.25rem;
+}
+
+.fav_card_ingredients_list .fav_card_ingredients_list_item,
+.signature_card_ingredients_list .signature_card_ingredients_list_item {
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+
+.carousel_loop {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.carousel_track {
+  display: flex;
+ /* animation: scrollStep 15s steps(6) infinite;
+  /*animation: scrollLoop 120s linear infinite;*/
+ /* animation: name duration timing-function delay iteration-count direction fill-mode;*/
+ 
+}
+
+.carousel_item {
+  margin-right: 30px;
+  flex: 0 0 auto;
+}
+
+/* folyamatos jobbra-balra animáció */
+@keyframes scrollLoop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+
+/*============  SCROLL UP ==================*/
+.scrollup {
+  position: fixed;
+  display: inline-block;
+  bottom: -50%;
+  right: 2rem;
+  padding: var(--mb-0-5);
+  background-color: var(--card-bg);
+  color: var(--grey-color);
+  border-radius: var(--border-radius-small);
+  box-shadow:  1px 2px 4px var(--grey-color-dark);
+  transition: all .3s ease;
+}
+
+.scrollup i {
+  font-size: var(--h1-font-size);
+  color: var(--grey-color);
+}
+
+.scrollup:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-0.5rem);
+}
+
+.scrollup:hover i{
+  color: var(--white-color);
+}
+
+.show-scroll {
+  bottom: 2rem;
 }
