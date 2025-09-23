@@ -821,3 +821,63 @@ margin-block: var(--header-height);
 .show-scroll {
   bottom: 2rem;
 }
+
+/*=======================================*/
+
+#footer {
+  border-top: 2px solid var(--accent-color);
+  background-color: var(--dark-ruby);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  max-width: 2000px;
+}
+
+.footer_links_link, .footer_social_link, .footer_logo {
+  color: var(--grey-color);
+  font-size: var(--h3-font-size);
+  font-weight: var(--font-semi-bold);
+  transition: all 0.3s ease;
+}
+
+
+.footer_logo:hover, .footer_links_link:hover, .footer_social_link:hover {
+  color: var(--secondary-color);
+}
+.footer_logo{
+  position: absolute;
+  left: 1rem;
+  top: 1em;
+}
+.footer_links .footer_links_list, .footer_social {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mb-1-25);
+}
+.footer_social{
+  margin-top: var(--mb-1-25);
+  position: absolute;
+  right: 2rem;
+  top: 1em;
+  }
+
+
+/*============= SCROLL-BAR =======================*/  
+::-webkit-scrollbar{
+  width: 0.6rem;
+  background-color: var(--card-bg);
+}
+
+::-webkit-scrollbar-thumb{
+    border-radius: 2rem;
+
+  background-color: var(--grey-color-dark);
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background-color: var(--white-color);
+}
