@@ -1,20 +1,5 @@
 :root{
   --header-height: 3rem;
-
- /* --body-color: #d8c8c8;
-  --card-accent: #ccaaae;
-    --card-bg: #7c111d;
-    --deep-ruby: #61040f;
-    --dark-ruby: #420c13;
-    --secondary-color: #9c122d; 
-    --third-color: #C73659; 
-    --accent-color: #efe530;
-    --white-color: #f5f5f5; 
-    --grey-color: #adaca8;
-    --light-grey-color:rgba(255, 255, 255, 0.8); 
-    --grey-color-dark: #2c2c2d; 
-    --box-shadow: 0 4px 8px rgba(0,0,0,0.1);*/
-
     
   --body-color: hsl(10, 30%, 85%);
   --card-accent: hsl(345, 30%, 80%);
@@ -150,7 +135,7 @@ html {
 
 body {
     background-color: var(--body-color);
-    height: 100vh;
+    /*height: 100vh;*/
     font-family: var(--body-font);
     min-width: 300px;
 }

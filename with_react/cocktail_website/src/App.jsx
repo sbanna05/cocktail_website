@@ -18,11 +18,13 @@ function App() {
   useEffect(()=> {
     fetch('http://localhost:5000/api/cocktails')
     .then(res => res.json())
-    .then(data => {console.log(data);
+    .then(data => {
+      console.log(data);
       setCocktails(data);
     })
     .catch(e => console.error(e))
   }, [])
+  
 
     
   return (
