@@ -846,6 +846,12 @@ margin-block: var(--header-height);
   z-index: 2;
 }
 
+@media screen and (max-width: 647px) {
+  .shop_items{
+    flex-direction: column;
+  }
+}
+
 /*============  SCROLL UP ==================*/
 .scrollup {
   position: fixed;

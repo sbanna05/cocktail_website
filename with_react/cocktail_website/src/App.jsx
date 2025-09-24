@@ -13,7 +13,18 @@ import './assets/css/index.css'
 import 'remixicon/fonts/remixicon.css';
 
 function App() {
+  const [cocktails, setCocktails] = useState([]);
 
+  useEffect(()=> {
+    fetch('http://localhost:5000/api/cocktails')
+    .then(res => res.json())
+    .then(data => {console.log(data);
+      setCocktails(data);
+    })
+    .catch(e => console.error(e))
+  }, [])
+
+    
   return (
     <>
     <Header />
