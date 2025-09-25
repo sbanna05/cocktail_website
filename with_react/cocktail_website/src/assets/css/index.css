@@ -496,9 +496,6 @@ main {
 }
 
 /*=============== HOME ===============*/
-#home{
-    padding-top: calc(var(--header-height)*3);
-}
 .home_container {
   padding: 3rem 1.5rem;
 }

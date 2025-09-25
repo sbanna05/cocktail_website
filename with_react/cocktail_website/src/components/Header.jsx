@@ -12,13 +12,18 @@ function Header() {
     const toggleMenu = () => setMenuOpen(!menuOpen);
 
     const toggleTheme = () => {
-        const themes = ['light', 'dark', 'accessible'];
-        const nextTheme = themes[(themes.indexOf(theme) + 1) % themes.length];
-        setTheme(nextTheme);
-        localStorage.setItem('theme', nextTheme);
-    };
+    const themes = ['light', 'dark', 'accessible'];
+    const nextTheme = themes[(themes.indexOf(theme) + 1) % themes.length];
+    setTheme(nextTheme);
+    localStorage.setItem('theme', nextTheme);
+
+    // Alkalmazzuk a <html> elemre
+    document.body.classList.remove('light-theme', 'dark-theme', 'accessible-theme');
+    document.body.classList.add(`${nextTheme}-theme`);
+};
+
     return (
-        <section className={`header ${theme}-theme`}>
+        <section className={`header`}>
             <nav className="nav">
                 <a href="#home" className="nav_logo">CocktailHeaven</a>
 
