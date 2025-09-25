@@ -2,8 +2,8 @@ import React from 'react';
 
 function SignInContainer({active, close, switchToSignUp }) {
   return (
-    <div className="sign_in_sign_up_container">
-      <div className="sign_in_sign_up_overlay" onClick={close}>
+    <div className="sign_in_sign_up_container" onClick={close}>
+      <div className="sign_in_sign_up_overlay">
         <div className={`sign_in_content ${active ? 'active' : ''}`} onClick={(e) => e.stopPropagation()}>
           <h1 className="sign_in_title">Sign In</h1>
           <form className="sign_in_form">

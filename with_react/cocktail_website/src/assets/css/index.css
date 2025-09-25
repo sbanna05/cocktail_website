@@ -489,6 +489,22 @@ main {
     top: 4rem;
     right: 5rem;
   }
+
+  .nav_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 99; /* a menü alatt legyen vagy felette, a cél szerint */
+  display: none;
+}
+
+.nav_overlay.show-overlay {
+  display: block;
+}
+
 }
 
 .show-menu {

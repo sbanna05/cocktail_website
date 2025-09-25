@@ -12,15 +12,15 @@ function Header() {
     const toggleMenu = () => setMenuOpen(!menuOpen);
 
     const toggleTheme = () => {
-    const themes = ['light', 'dark', 'accessible'];
-    const nextTheme = themes[(themes.indexOf(theme) + 1) % themes.length];
-    setTheme(nextTheme);
-    localStorage.setItem('theme', nextTheme);
+        const themes = ['light', 'dark', 'accessible'];
+        const nextTheme = themes[(themes.indexOf(theme) + 1) % themes.length];
+        setTheme(nextTheme);
+        localStorage.setItem('theme', nextTheme);
 
-    // Alkalmazzuk a <html> elemre
-    document.body.classList.remove('light-theme', 'dark-theme', 'accessible-theme');
-    document.body.classList.add(`${nextTheme}-theme`);
-};
+        // Alkalmazzuk a <html> elemre
+        document.body.classList.remove('light-theme', 'dark-theme', 'accessible-theme');
+        document.body.classList.add(`${nextTheme}-theme`);
+    };
 
     return (
         <section className={`header`}>
@@ -30,7 +30,7 @@ function Header() {
                 <div className={`nav_menu ${menuOpen ? 'show-menu' : ''}`}>
                     <ul className="nav_list">
                         <li className="nav_item"><a href="#home" className="nav_link">Home</a></li>
-                        <li className="nav_item"><a href="#favorites" className="nav_link">Favourites</a></li>
+                        <li className="nav_item"><a href="#favourites" className="nav_link">Favourites</a></li>
                         <li className="nav_item"><a href="#signatures" className="nav_link">Signature Drinks</a></li>
                         <li className="nav_item"><a href="#shop" className="nav_link">Shop</a></li>
                         <li className="nav_item"><a href="#recipes" className="nav_link">Recipes</a></li>
@@ -53,6 +53,11 @@ function Header() {
                         <i className="ri-login-box-line"></i>
                     </div>
                 </div>
+
+                {menuOpen && (
+                    <div className="nav_overlay show-overlay" onClick={toggleMenu}></div>
+                )}
+
 
                 <div className="nav_toggle" onClick={toggleMenu}>
                     <i className="ri-menu-fill"></i>
