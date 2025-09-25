@@ -1,15 +1,21 @@
-import React from 'react'
 import { useState } from "react";
 import SignInContainer from './SignInContainer.jsx';
 import SignUpContainer from './SignUpContainer.jsx';
 
-function Header() {
+function Header({ user, onLogin }) {
     const [menuOpen, setMenuOpen] = useState(false);
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
     const [showSignIn, setShowSignIn] = useState(false);
     const [showSignUp, setShowSignUp] = useState(false);
 
     const toggleMenu = () => setMenuOpen(!menuOpen);
+
+    const handleLogout = () => {
+        setUser(null);
+    };
+
+    console.log(user)
+    console.log(onLogin)
 
     const toggleTheme = () => {
         const themes = ['light', 'dark', 'accessible'];
@@ -48,10 +54,23 @@ function Header() {
                         <i className={`ri-${theme === 'light' ? 'moon' : theme === 'dark' ? 'eye' : 'sun'}-line change_theme`}></i>
                     </div>
 
-                    <div className="sign_in_icon" onClick={() => setShowSignIn(true)}>
-                        <span className="sign_in_name">Sign In</span>
-                        <i className="ri-login-box-line"></i>
-                    </div>
+                    {!user ? (
+            <div className="sign_in_icon" onClick={() => setShowSignIn(true)}>
+              <span className="sign_in_name">Sign In</span>
+              <i className="ri-login-box-line"></i>
+            </div>
+          ) : (
+            <div className="shop_actions">
+              <a href="#cart" className="nav_cart">
+                <i className="ri-shopping-cart-line"></i>
+                <span className="cart_count">0</span>
+              </a>
+              <a href="#profile" className="nav_profile">
+                <i className="ri-user-line"></i>
+                <span className="profile_name">{user.username}</span>
+              </a>
+            </div>
+          )}
                 </div>
 
                 {menuOpen && (
@@ -64,9 +83,9 @@ function Header() {
                 </div>
             </nav>
 
-            {showSignIn && <SignInContainer active={showSignIn} close={() => setShowSignIn(false)} switchToSignUp={() => { setShowSignIn(false); setShowSignUp(true); }} />}
+            {showSignIn && <SignInContainer active={showSignIn} close={() => setShowSignIn(false)} switchToSignUp={() => { setShowSignIn(false); setShowSignUp(true); }} onLogin={onLogin} />}
             {showSignUp && <SignUpContainer active={showSignUp} close={() => setShowSignUp(false)} switchToSignIn={() => { setShowSignUp(false); setShowSignIn(true); }} />}
-    
+
         </section>
     )
 }

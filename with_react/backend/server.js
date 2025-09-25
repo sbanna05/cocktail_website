@@ -59,6 +59,30 @@ app.post('/api/users', async (req, res) => {
     }
 });
 
+app.post('/api/auth/login', async (req, res) => {
+    const { username, password } = req.body;
+    if (!username || !password)  return res.status(400).json({ error: 'Hiányzó adatok' });
+    try {
+        const rows = await db.query(
+            'SELECT id, name, password FROM users WHERE name = ?',
+            [username]
+        );
+
+        if (!rows.length) return res.status(401).json({ error: 'Hibás felhasználónév vagy jelszó' });
+        const user = rows[0];
+
+        // Egyszerű példa: plaintext jelszó (később bcrypt)
+        if (user.password !== password) {
+            return res.status(401).json({ error: 'Hibás jelszó' });
+        }
+        // Visszaadjuk a userId-t és a nevet
+        res.json({ userId: Number(user.id), email: user.email });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Szerverhiba' });
+    }
+});
+
 
 
 // Kosárhoz adás

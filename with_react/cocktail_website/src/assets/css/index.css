@@ -270,6 +270,31 @@ main {
   align-items: center;
 }
 
+
+
+.shop_actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.nav_cart, .nav_profile {
+    position: relative;
+    cursor: pointer;
+    font-size: var(--normal-font-size);
+    color: var(--grey-color);
+    transition: color 0.3s;
+    cursor: pointer;
+}
+.nav_cart:hover, .nav_profile:hover {
+    color: var(--white-color);
+}
+
+
+
+
 /* ===== Alapértelmezetten desktop nézet ===== */
 .nav_menu {
   flex: 1;

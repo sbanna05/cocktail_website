@@ -7,13 +7,11 @@ import Contact from './pages/Contact'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import ScrollUp from './components/ScrollUp'
-//import './assets/css/style.css'
-import './assets/css/index.css'
-
 import 'remixicon/fonts/remixicon.css';
 
 function App() {
   const [cocktails, setCocktails] = useState([]);
+  const [user, setUser] = useState(null)
 
   useEffect(()=> {
     fetch('http://localhost:5000/api/cocktails')
@@ -24,12 +22,14 @@ function App() {
     })
     .catch(e => console.error(e))
   }, [])
+
+  const handleLogin = (userData) => setUser(userData);
   
 
     
   return (
     <>
-    <Header />
+    <Header user={user} onLogin={handleLogin}/>
      <main>
         <Home />
         <Favourites />
