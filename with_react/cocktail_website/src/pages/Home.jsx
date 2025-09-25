@@ -25,7 +25,7 @@ function Home() {
             </p>
 
             <div className="home_links">
-              <a href="#favorites" className="home_link">
+              <a href="#favourites" className="home_link">
                 Explore Favourites
               </a>
               <a href="#shop" className="home_link">
