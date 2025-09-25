@@ -1,13 +1,13 @@
 import React, {useRef, useState, useEffect} from "react";
 import CocktailCard from "../components/CocktailCard";
-import reverseCherryManhattan from "../assets/images/reverse_cherry_manhattan.png";
+import reverseCherryManhattan from "../assets/images/reverseCherryManhattan.png";
 import mojito from "../assets/images/mojito.webp";
 import oldFashioned from "../assets/images/old_fashioned.webp";
 import aviation from "../assets/images/aviation.webp";
-import nuttyAlexander from "../assets/images/nutty_alexander.webp";
+import nuttyAlexander from "../assets/images/nuttyAlexander.webp";
 import boulevardier from "../assets/images/boulevardier.webp";
 
-const cocktails = [
+const favourites = [
   { id: "drink_1", title: "Reverse Cherry Manhattan", ingredients: ["2 oz Rye Whiskey", "1 oz Sweet Vermouth", "1/2 oz Cherry Liqueur", "2 dashes Angostura Bitters", "Garnish: Maraschino Cherry"], image: reverseCherryManhattan, alt: "reverse_cherry_manhattan", width: 150, height: 150 },
   { id: "drink_2", title: "Mojito", ingredients: ["2 oz White Rum", "1 oz Lime Juice", "2 tsp Sugar", "Mint Leaves", "Club Soda"], image: mojito, alt: "mojito", width: 250, height: 250 },
   { id: "drink_3", title: "Old Fashioned", ingredients: ["2 oz Bourbon or Rye Whiskey", "1 Sugar Cube", "2 dashes Angostura Bitters", "Orange Peel"], image: oldFashioned, alt: "old_fashioned", width: 150, height: 150 },
@@ -18,10 +18,23 @@ const cocktails = [
 
 export default function Favourites() {
   const trackRef = useRef(null);
+const formatted = favourites.map(c => ({
+  id: c.id,
+  title: c.title,
+  image:
+    c.id === "drink_1" ? reverseCherryManhattan :
+    c.id === "drink_2" ? mojito :
+    c.id === "drink_3" ? oldFashioned :
+    c.id === "drink_4" ? aviation :
+    c.id === "drink_5" ? nuttyAlexander :
+    c.id === "drink_6" ? boulevardier : null,
+  ingredients: c.ingredients,
+}));
+
 
   useEffect(() => {
     const track = trackRef.current;
-    const slideCount = cocktails.length;
+    const slideCount = formatted.length;
     const slideWidth = 330; // kártya + margin
     let index = 0;
 
@@ -45,17 +58,17 @@ export default function Favourites() {
   }, []);
 
   return (
-    <section className="fav_section_container">
+    <section className="fav_section_container" id="favourites">
       <h2 className="fav_title">This Week's Favourites</h2>
       <div className="carousel_loop">
         <div className="carousel_track" ref={trackRef}>
-          {cocktails.map((c) => (
+          {formatted.map((c) => (
             <div key={c.id} className="carousel_item">
               <CocktailCard {...c} />
             </div>
           ))}
           {/* másolat a sima loophoz */}
-          {cocktails.map((c) => (
+          {formatted.map((c) => (
             <div key={"loop-" + c.id} className="carousel_item">
               <CocktailCard {...c} />
             </div>

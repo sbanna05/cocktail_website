@@ -32,7 +32,7 @@ function App() {
     <Header />
      <main>
         <Home />
-        <Favourites/>
+        <Favourites />
 
 
         <Signatures />

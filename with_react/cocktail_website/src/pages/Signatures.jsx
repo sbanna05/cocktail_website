@@ -32,7 +32,7 @@ function Signatures() {
   const moveSlide = () => {
     track.style.transition = "transform 1.5s ease";
     // FORDÍTOTT IRÁNY: - helyett +, vagy negatív index
-    index++;
+    index--;
     track.style.transform = `translateX(-${index * slideWidth}px)`;
     if (index <= 0) {
       setTimeout(() => {
@@ -50,7 +50,7 @@ function Signatures() {
 
   return (
     <section id="signatures" className="signatures_section_container">
-      <h2 className="signatures_title">Signature Cocktails</h2>
+      <h2 className="signatures_title">Discover Our Signature Cocktails</h2>
       <div className="carousel_loop">
         <div className="carousel_track" ref={trackRef}>
           

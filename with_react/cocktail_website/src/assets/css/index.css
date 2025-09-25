@@ -615,7 +615,7 @@ margin-block: var(--header-height);
   margin-bottom: 2rem;     /* legyen tér a carousel előtt */
 }
 
-.fav_card, .signature_card{
+.cocktail_card{
   background-color: var(--card-bg);
   position: relative;
   width: 300px;
@@ -624,19 +624,19 @@ margin-block: var(--header-height);
 }
 
 @media screen and (max-width: 768px) {
-  .fav_card, .signature_card {
+  .cocktail_card {
     width: 200px;
     height: 200px;
   }
 }
 @media screen and (max-width: 480px) {
-  .fav_card, .signature_card {
+  .cocktail_card {
     width: 180px;
     height: 180px;
   }
 }
 
-.fav_card_bg, .signature_card_bg {
+.card_bg {
   background-color: #ddd;
   border-radius: var(--border-radius-card);
   box-shadow: inset 10px 10px 10px #999,
@@ -646,8 +646,7 @@ margin-block: var(--header-height);
   transition: transform 0.8s, box-shadow 0.8s;
  aspect-ratio: 0.5;
 }
-.fav_card_bg .fav_card_title,
- .signature_card_bg .signature_card_title {
+.card_bg .card_title {
       position: absolute;
       bottom: 20px;
       left: 30px;
@@ -659,28 +658,24 @@ margin-block: var(--header-height);
 }
 
 
-.fav_card:hover img,
-.signature_card:hover img {
+.cocktail_card:hover img {
       transform: translateY(-50%) scale(1.1);
       z-index: 2;
     }
-.fav_card:hover .fav_card_bg span,
-.signature_card:hover .signature_card_bg span {
+.cocktail_card:hover .card_bg span {
       transform: translateX(80deg) translateY(-10px) scale(1.1);
     }
-.fav_card:hover .fav_card_ingredients,
-.signature_card:hover .signature_card_ingredients {
+.cocktail_card:hover .card_ingredients {
   visibility: visible;
   transform: translateY(30%);
 }
 /*
-.fav_card:hover .fav_card_title {
+.card:hover .card_title {
   transform: translateY(-10px)  scale(1.5);
   z-index: 5;
 }*/
 
-.fav_card:hover .fav_card_title,
-.signature_card:hover .signature_card_title {
+.cocktail_card:hover .card_title {
   position: absolute;
   bottom: 20px;
   left: 30px;
@@ -692,15 +687,12 @@ margin-block: var(--header-height);
   transition: transform 0.8s ease;
 }
 
-.fav_card:hover .fav_card_bg,
-.signature_card:hover .signature_card_bg {
+.cocktail_card:hover .card_bg{
  transform: rotateX(70deg);
   box-shadow: 12px 24px 24px rgba(0,0,0,0.4);
 }
 
-
-.fav_card_image,
-.signature_card_image {
+.card_image {
   position: absolute;
   background-repeat: none;
   width: 50%;
@@ -711,8 +703,7 @@ margin-block: var(--header-height);
   transition: transform 0.8s ease;
   z-index: 5;
 }
-.fav_card_ingredients,
-.signature_card_ingredients {
+.card_ingredients {
       position: absolute;
       left: 20%;
       right: 20%;
@@ -729,16 +720,14 @@ margin-block: var(--header-height);
       transition: transform 0.8s ease;
       z-index: 2000;
 }
-.fav_card_ingredients_list,
-.signature_card_ingredients_list {
+.card_ingredients_list {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   gap: 0.25rem;
 }
 
-.fav_card_ingredients_list .fav_card_ingredients_list_item,
-.signature_card_ingredients_list .signature_card_ingredients_list_item {
+.card_ingredients_list .card_ingredients_list_item {
   white-space: nowrap;
   padding: 4px 8px;
   border-radius: 4px;
