@@ -19,6 +19,14 @@ function AddToCartButton({ user, productId, type, onAdd }) {
         body: JSON.stringify(body)
       });
 
+   /*   const updateCartCount = async (userId) => {
+  const res = await fetch(`http://localhost:5000/api/cart/${userId}`);
+  const data = await res.json();
+  const count = data.reduce((acc, item) => acc + item.quantity, 0);
+  setCartCount(count);
+};*/
+
+
       const data = await res.json();
       console.log("cart:", data)
       if(res.ok){

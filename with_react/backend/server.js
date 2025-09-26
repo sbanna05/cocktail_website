@@ -6,6 +6,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use((req, res, next) => {
+  const oldJson = res.json;
+  res.json = function(data) {
+    const safeData = JSON.parse(JSON.stringify(data, (_, v) =>
+      typeof v === 'bigint' ? v.toString() : v
+    ));
+    return oldJson.call(this, safeData);
+  }
+  next();
+});
+
 //adatbázis
 const db = await mariadb.createPool({
     host: 'localhost',
@@ -61,7 +72,7 @@ app.post('/api/users', async (req, res) => {
 
 app.post('/api/auth/login', async (req, res) => {
     const { username, password } = req.body;
-    if (!username || !password)  return res.status(400).json({ error: 'Hiányzó adatok' });
+    if (!username || !password) return res.status(400).json({ error: 'Hiányzó adatok' });
     try {
         const rows = await db.query(
             'SELECT id, name, password FROM users WHERE name = ?',
@@ -84,24 +95,24 @@ app.post('/api/auth/login', async (req, res) => {
 });
 
 app.get("/api/beverages", async (req, res) => {
-  try {
-    const rows = await db.query("SELECT * FROM beverages");
-    res.json(rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Szerverhiba a beverages lekérésekor" });
-  }
+    try {
+        const rows = await db.query("SELECT * FROM beverages");
+        res.json(rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Szerverhiba a beverages lekérésekor" });
+    }
 });
 
 // ===== 2. Essentials API =====
 app.get("/api/essentials", async (req, res) => {
-  try {
-    const rows = await db.query("SELECT * FROM essentials");
-    res.json(rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Szerverhiba az essentials lekérésekor" });
-  }
+    try {
+        const rows = await db.query("SELECT * FROM essentials");
+        res.json(rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Szerverhiba az essentials lekérésekor" });
+    }
 });
 
 
@@ -116,14 +127,14 @@ app.post('/api/cart', async (req, res) => {
         let carts = await db.query("Select * from carts where user_id = ?", [userId]);
         let cartId;
 
-        if(carts.length ===0){
+        if (carts.length === 0) {
             let result = await db.query("insert into carts (user_id) values (?)", [userId]);
             cartId = result.insertId;
-        }else cartId = carts[0].id
+        } else cartId = carts[0].id
 
         console.log(cartId);
 
-        let sql =`select * from cart_items
+        let sql = `select * from cart_items
                 where cart_id = ?`;
         let params;
         if (beverageId) {
@@ -136,26 +147,72 @@ app.post('/api/cart', async (req, res) => {
             return res.status(400).json({ error: "Hiányzó termék ID" });
         }
         console.log(sql)
-                
+
         let items = await db.query(sql, params)
 
         console.log(items)
 
-        if (items.length > 0){
+        if (items.length > 0) {
             await db.query(`update cart_items Set quantity = quantity + ?
                     Where id = ?`,
                 [quantity || 1, items[0].id])
-        }else{
+        } else {
 
             await db.query(`INSERT INTO cart_items
                  (cart_id, beverage_id, essential_id, quantity) VALUES (?, ?, ?, ?)`,
-        [cartId, beverageId || null, essentialId || null, quantity || 1]
-      );
-    }
-        
+                [cartId, beverageId || null, essentialId || null, quantity || 1]
+            );
+        }
+
         res.json({ message: "Hozzáadva a kosárhoz!", cartId });
     } catch (err) {
         res.status(500).json({ error: 'Adatbázis hiba' });
+    }
+});
+
+app.get('/api/cart/:userId', async (req, res) => {
+    const userId = req.params.userId;
+    try {
+        const carts = await db.query("Select * from carts where user_id = ?", [userId])
+        if (!carts.length) return res.json({ items: [] });
+
+        const cartId = carts[0].id;
+
+        const orderItems = await db.query(`
+      SELECT ci.id, ci.quantity, 
+             COALESCE(b.name, e.name) AS name,
+             COALESCE(b.price, e.price) AS price
+      FROM cart_items ci
+      LEFT JOIN beverages b ON ci.beverage_id = b.id
+      LEFT JOIN essentials e ON ci.essential_id = e.id
+      WHERE ci.cart_id = ?
+    `, [cartId]);
+        res.json({ orderItems })
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ error: 'Hiba a kosár lekéréséhez.' })
+    }
+})
+
+app.post('/api/orders', async (req, res) => {
+    const { userId, orderItems, total } = req.body;
+    if (!userId || !orderItems || !Array.isArray(orderItems) || orderItems.length === 0) {
+    return res.status(400).json({ error: "Hiányzó adatok a rendeléshez" });
+  }
+
+    try {
+        const orderItemsJSON = JSON.stringify(orderItems || req.body.orderItems);
+        const result = await db.query("insert into orders (user_id, total, order_items) values (?,?,?)",
+            [userId, total, orderItemsJSON]
+        )
+        const orderId = result.insertId
+        // Kosár ürítése
+        await db.query("DELETE FROM cart_items WHERE cart_id = (SELECT id FROM carts WHERE user_id = ?)", [userId]);
+
+        res.json({ message: 'Rendelés létrehozva', orderId });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Hiba a rendelés mentésekor' });
     }
 });
 

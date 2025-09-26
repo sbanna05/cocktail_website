@@ -2,7 +2,8 @@ import { useState } from "react";
 import SignInContainer from './SignInContainer.jsx';
 import SignUpContainer from './SignUpContainer.jsx';
 
-function Header({ user, onLogin, cartCount }) {
+
+function Header({ user, onLogin, cartCount, setShowCart }) {
     const [menuOpen, setMenuOpen] = useState(false);
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
     const [showSignIn, setShowSignIn] = useState(false);
@@ -16,8 +17,6 @@ function Header({ user, onLogin, cartCount }) {
 
     console.log(user)
     console.log(onLogin)
-    console.log("showSignIn:", showSignIn);
-console.log("showSignUp:", showSignUp);
 
 
     const toggleTheme = () => {
@@ -64,11 +63,11 @@ console.log("showSignUp:", showSignUp);
             </div>
           ) : (
             <div className="shop_actions">
-              <a href="#cart" className="nav_cart">
+              <div className="nav_cart" onClick={() => setShowCart(true)}>
                 <i className="ri-shopping-cart-line"></i>
                 <span className="cart_count">{cartCount}</span>
-              </a>
-              <a href="#profile" className="nav_profile" onClick={() => onLogin(null)}>
+              </div>
+              <a href="#profile" className="nav_profile" onClick={handleLogout}>
                 <i className="ri-user-line"></i>
                 <span className="profile_name">{user.username}</span>
               </a>

@@ -537,6 +537,29 @@ main {
   right: 0;
 }
 
+/*=================================777*/
+.view_cart_container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--card-bg);
+  min-width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 2px solid var(--secondary-color);
+  padding: 20px;
+  z-index: 1000;
+}
+
+.cart_table{
+  display: table;
+  border: 2px solid black;
+
+}
+
+
+
 /*=============== HOME ===============*/
 .home_container {
   padding: 3rem 1.5rem;
