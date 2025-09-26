@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';  // 👈 react-router Link
 
 function Shop() {
   return (
@@ -6,15 +7,15 @@ function Shop() {
       <div className="shop_title section_title">Discover Our Latest Items</div>
 
       <div className="shop_items">
-        <a href="shop.html" className="shop_item">
+        <Link to="/webshop" className="shop_item">
           <img src="./src/assets/images/beverages.jpg" alt="Beverages" width={300}/>
           <span className="shop_label">Beverages</span>
-        </a>
+        </Link>
 
-        <a href="shop.html" className="shop_item">
+        <Link to="/webshop" className="shop_item">   
           <img src="./src/assets/images/essentials.jpg" alt="Essentials" width={300} height={250} />
           <span className="shop_label">Essentials</span>
-        </a>
+        </Link>
       </div>
     </section>
   );

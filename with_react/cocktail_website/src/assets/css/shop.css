@@ -10,7 +10,6 @@
 #shop {
   /*  max-width: 1150px;*/
     margin: 3rem auto 2rem auto;
-    background: var(--card-bg);
     border-radius: 1rem;
     box-shadow: 0 4px 24px 0 rgba(0,0,0,0.07);
     padding: 2.5rem 2rem 2rem 2rem;

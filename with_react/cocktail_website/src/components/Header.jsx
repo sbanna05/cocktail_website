@@ -2,7 +2,7 @@ import { useState } from "react";
 import SignInContainer from './SignInContainer.jsx';
 import SignUpContainer from './SignUpContainer.jsx';
 
-function Header({ user, onLogin }) {
+function Header({ user, onLogin, cartCount }) {
     const [menuOpen, setMenuOpen] = useState(false);
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
     const [showSignIn, setShowSignIn] = useState(false);
@@ -11,11 +11,14 @@ function Header({ user, onLogin }) {
     const toggleMenu = () => setMenuOpen(!menuOpen);
 
     const handleLogout = () => {
-        setUser(null);
+        onLogin(null);
     };
 
     console.log(user)
     console.log(onLogin)
+    console.log("showSignIn:", showSignIn);
+console.log("showSignUp:", showSignUp);
+
 
     const toggleTheme = () => {
         const themes = ['light', 'dark', 'accessible'];
@@ -31,16 +34,16 @@ function Header({ user, onLogin }) {
     return (
         <section className={`header`}>
             <nav className="nav">
-                <a href="#home" className="nav_logo">CocktailHeaven</a>
+                <a href="/#home" className="nav_logo">CocktailHeaven</a>
 
                 <div className={`nav_menu ${menuOpen ? 'show-menu' : ''}`}>
                     <ul className="nav_list">
-                        <li className="nav_item"><a href="#home" className="nav_link">Home</a></li>
-                        <li className="nav_item"><a href="#favourites" className="nav_link">Favourites</a></li>
-                        <li className="nav_item"><a href="#signatures" className="nav_link">Signature Drinks</a></li>
-                        <li className="nav_item"><a href="#shop" className="nav_link">Shop</a></li>
-                        <li className="nav_item"><a href="#recipes" className="nav_link">Recipes</a></li>
-                        <li className="nav_item"><a href="#contact-us" className="nav_link">Contact Us</a></li>
+                        <li className="nav_item"><a href="/#home" className="nav_link">Home</a></li>
+                        <li className="nav_item"><a href="/#favourites" className="nav_link">Favourites</a></li>
+                        <li className="nav_item"><a href="/#signatures" className="nav_link">Signature Drinks</a></li>
+                        <li className="nav_item"><a href="/#shop" className="nav_link">Shop</a></li>
+                        <li className="nav_item"><a href="/#recipes" className="nav_link">Recipes</a></li>
+                        <li className="nav_item"><a href="/#contact-us" className="nav_link">Contact Us</a></li>
                     </ul>
 
                     <div className="nav_close" onClick={toggleMenu}>
@@ -63,9 +66,9 @@ function Header({ user, onLogin }) {
             <div className="shop_actions">
               <a href="#cart" className="nav_cart">
                 <i className="ri-shopping-cart-line"></i>
-                <span className="cart_count">0</span>
+                <span className="cart_count">{cartCount}</span>
               </a>
-              <a href="#profile" className="nav_profile">
+              <a href="#profile" className="nav_profile" onClick={() => onLogin(null)}>
                 <i className="ri-user-line"></i>
                 <span className="profile_name">{user.username}</span>
               </a>

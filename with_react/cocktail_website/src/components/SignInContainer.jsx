@@ -3,7 +3,7 @@ import React, { useState } from "react";
 function SignInContainer({ active, close, switchToSignUp, onLogin }) {
   const [userdata, setUserData] = useState({
     username: '',
-    password:''
+    password: ''
   })
 
   const handleChange = (e) => {
@@ -11,36 +11,37 @@ function SignInContainer({ active, close, switchToSignUp, onLogin }) {
   }
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const res = await fetch("http://localhost:5000/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(userdata),
-    });
+    e.preventDefault();
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userdata),
+      });
 
-    const data = await res.json();
-    console.log(data)
+      const data = await res.json();
+      console.log(data)
 
-    if(res.ok) {
-      onLogin({ userId: data.userId, username: userdata.username });
-      close();
-    } else {
-      alert(data.error);
+      if (res.ok) {
+        onLogin({ userId: data.userId, username: userdata.username });
+        close();
+      } else {
+        alert(data.error);
+      }
+    } catch (err) {
+      console.log(err);
     }
-  } catch (err) {
-    console.log(err);
-  }
-};
+  };
 
 
   return (
-    <div className="sign_in_sign_up_container" onClick={close}>
+    <div className={`sign_in_sign_up_container ${active ? "active" : ""}`} onClick={close}>
       <div className="sign_in_sign_up_overlay">
         <div
           className={`sign_in_content ${active ? "active" : ""}`}
           onClick={(e) => e.stopPropagation()}
         >
+
           <h1 className="sign_in_title">Sign In</h1>
           <form className="sign_in_form" onSubmit={handleSubmit}>
             <input
@@ -51,6 +52,7 @@ function SignInContainer({ active, close, switchToSignUp, onLogin }) {
               className="sign_in_input"
               placeholder="Username"
               required
+              autoComplete="username"
             />
             <input
               type="password"
@@ -60,6 +62,7 @@ function SignInContainer({ active, close, switchToSignUp, onLogin }) {
               className="sign_in_input"
               placeholder="Password"
               required
+              autoComplete="current-password"
             />
             <div className="remember_forgot">
               <label className="remember_me_label">

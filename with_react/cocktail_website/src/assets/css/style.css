@@ -294,7 +294,7 @@ button:active {
 }
 
 /*=======================Sign in and sign up==================================*/
-.sign_in_sign_up_container {
+/*.sign_in_sign_up_container {
   position: fixed;
   top: 0;
   left: 0;
@@ -305,7 +305,7 @@ button:active {
   justify-content: center;
   align-items: center;
   z-index: var(--z-modal);
-}
+}*/
 
 .sign_in_sign_up_overlay {
   position: relative;
