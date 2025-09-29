@@ -2,6 +2,7 @@
   --header-height: 3rem;
     
   --body-color: hsl(10, 30%, 85%);
+  --cart-row-color: hsl(10, 30%, 85%);
   --card-accent: hsl(345, 30%, 80%);
   --card-bg: hsl(350, 75%, 30%);
   --deep-ruby: hsl(350, 85%, 20%);
@@ -54,6 +55,7 @@
  /* --body-color: hsl(340, 30%, 35%);*/
 
   --body-color: #342121;
+  --cart-row-color: hsl(10, 40%, 65%);
   --card-accent: hsl(350, 45%, 55%);
   --card-bg: hsl(350, 80%, 20%);
   --deep-ruby: hsl(350, 60%, 20%);
@@ -71,6 +73,8 @@
 
 .accessible-theme {
   --body-color: #2e2525;
+  
+  --cart-row-color: hsl(83, 65%, 74%);
   --card-bg: #371d1d;
   --card-accent: #01f0df;
   --deep-ruby: #833001;
@@ -174,7 +178,7 @@ button:hover {
 
 button:active {
   background-color: var(--third-color);
-  color: var(--grey-color-dark);
+  color: var(--grey-color);
 }
 
 main {
@@ -182,7 +186,7 @@ main {
   position: relative;
 }
 .section {
-    width: 50vw;
+  width: 50vw;
   position: relative;
   padding: 0 1.25rem;
 }
@@ -538,26 +542,109 @@ main {
 }
 
 /*=================================777*/
+/* Overlay háttér */
+.cart_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5); /* félig átlátszó fekete */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001; /* a többi elem fölé kerül */
+}
+
 .view_cart_container {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--card-bg);
+  box-shadow: 0 2px 4px var(--grey-color-dark);
   min-width: 400px;
+  max-width: 850px;
   max-height: 80vh;
   overflow-y: auto;
-  border: 2px solid var(--secondary-color);
+  border: 3px solid var(--accent-color);
   padding: 20px;
   z-index: 1000;
 }
+.view_cart_title{
+  font-size: var(--bigger-font-size);
+  justify-self: center;
+  padding-bottom: var(--mb-0-5);
+}
 
 .cart_table{
+  width: 100%;
   display: table;
   border: 2px solid black;
+  border-collapse: collapse;
 
 }
 
+.cart_table thead th{
+  color: black;
+  text-align: center;
+  padding: var(--mb-0-5);
+  font-weight: 600;
+  background-color: var(--secondary-color);
+  border-bottom: 2px solid black;
+}
+
+.cart_table tbody tr:nth-child(odd){
+  text-align: center;
+  background-color: var(--cart-row-color);
+}
+.cart_table tbody tr:nth-child(even){
+  text-align: center;
+  background-color: var(--card-accent);
+}
+
+.cart_table td {
+  padding: var(--mb-0-25);
+  border-bottom: 1px solid #ccc;
+}
+
+.cart_table tfoot td {
+  border-top: 2px solid black;
+  background-color: var(--secondary-color);
+  font-weight: bold;
+  padding: 10px;
+}
+
+.cart_buttons {
+  margin-top: 1rem;
+  display: flex;
+  gap: 10px;
+  float: right;
+  justify-content: space-between;
+}
+
+.order_btn, .cancel_btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.order_btn:hover, .cancel_btn:hover{
+  background-color: var(--dark-ruby);
+  box-shadow: 0 2px 4px var(--grey-color-dark);
+}
+
+.order_btn {
+  background-color: var(--secondary-color);
+  color: var(--grey-color-dark);
+}
+
+.cancel_btn {
+  background-color: var(--third-color);
+  color: var(--grey-color-dark);
+}
 
 
 /*=============== HOME ===============*/
@@ -659,7 +746,8 @@ main {
   padding: 1.5rem 1.5rem;
   /*height: calc(60vh - var(--header-height));*/
   height: auto;
-  padding-block-end: 3rem;
+  width: 100vw;
+  padding-block-end: 5rem;
   box-shadow: #2c2c2d 0px 4px 8px;
   display: grid;
   overflow: visible;
@@ -680,8 +768,8 @@ margin-block: var(--header-height);
 .cocktail_card{
   background-color: var(--card-bg);
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 280px;
+  height: 280px;
   border-radius: var(--border-radius-card);
 }
 
@@ -804,10 +892,7 @@ margin-block: var(--header-height);
 
 .carousel_track {
   display: flex;
- /* animation: scrollStep 15s steps(6) infinite;
-  /*animation: scrollLoop 120s linear infinite;*/
- /* animation: name duration timing-function delay iteration-count direction fill-mode;*/
- 
+  overflow-y: visible;
 }
 
 .carousel_item {
@@ -927,6 +1012,7 @@ margin-block: var(--header-height);
   padding: 1.5rem 0.5rem;
   border-top: var(--accent-color) 2px solid;
   margin: 0;
+  width: 100vw;
 }
 .contact-us_info{
   display: flex;

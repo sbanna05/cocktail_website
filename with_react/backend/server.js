@@ -150,14 +150,13 @@ app.post('/api/cart', async (req, res) => {
 
         let items = await db.query(sql, params)
 
-        console.log(items)
+        console.log("cartitems:", items)
 
         if (items.length > 0) {
             await db.query(`update cart_items Set quantity = quantity + ?
                     Where id = ?`,
                 [quantity || 1, items[0].id])
         } else {
-
             await db.query(`INSERT INTO cart_items
                  (cart_id, beverage_id, essential_id, quantity) VALUES (?, ?, ?, ?)`,
                 [cartId, beverageId || null, essentialId || null, quantity || 1]
@@ -179,14 +178,17 @@ app.get('/api/cart/:userId', async (req, res) => {
         const cartId = carts[0].id;
 
         const orderItems = await db.query(`
-      SELECT ci.id, ci.quantity, 
-             COALESCE(b.name, e.name) AS name,
-             COALESCE(b.price, e.price) AS price
-      FROM cart_items ci
-      LEFT JOIN beverages b ON ci.beverage_id = b.id
-      LEFT JOIN essentials e ON ci.essential_id = e.id
-      WHERE ci.cart_id = ?
-    `, [cartId]);
+            SELECT ci.id, ci.quantity, 
+                    ci.beverage_id, 
+                    ci.essential_id,
+                    COALESCE(b.name, e.name) AS name,
+                    COALESCE(b.price, e.price) AS price
+            FROM cart_items ci
+            LEFT JOIN beverages b ON ci.beverage_id = b.id
+            LEFT JOIN essentials e ON ci.essential_id = e.id
+            WHERE ci.cart_id = ?
+         `, [cartId]);
+
         res.json({ orderItems })
     } catch (err) {
         console.log(err)
@@ -199,6 +201,7 @@ app.post('/api/orders', async (req, res) => {
     if (!userId || !orderItems || !Array.isArray(orderItems) || orderItems.length === 0) {
     return res.status(400).json({ error: "Hiányzó adatok a rendeléshez" });
   }
+  console.log("orderItems:", orderItems)
 
     try {
         const orderItemsJSON = JSON.stringify(orderItems || req.body.orderItems);
@@ -206,6 +209,20 @@ app.post('/api/orders', async (req, res) => {
             [userId, total, orderItemsJSON]
         )
         const orderId = result.insertId
+
+        //stock frissítés
+        for(let item of orderItems){
+            if(item.beverageId){
+                await db.query("update beverages set stock = stock - ? where name = ? and stock >= ?"
+                    ,[item.quantity, item.name, item.quantity]
+                )
+            }
+            if(item.essentialId){
+                await db.query("update essentials set stock = stock - ? where name = ? and stock >= ?"
+                    ,[item.quantity, item.name, item.quantity]
+                )
+            }
+        }
         // Kosár ürítése
         await db.query("DELETE FROM cart_items WHERE cart_id = (SELECT id FROM carts WHERE user_id = ?)", [userId]);
 

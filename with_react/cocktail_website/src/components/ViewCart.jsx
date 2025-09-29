@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function ViewCart({ user, onOrder }) {
+function ViewCart({ user, onOrder, onClose }) {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -32,7 +32,6 @@ function ViewCart({ user, onOrder }) {
 
   const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
 
-
   const handleOrder = async () => {
     if (!cartItems.length) {
       alert('A kosár üres!');
@@ -42,7 +41,9 @@ function ViewCart({ user, onOrder }) {
     // Lista létrehozása a megrendelt itemekből (név + db)
     const orderItems = cartItems.map(item => ({
       name: item.name,
-      quantity: item.quantity
+      quantity: item.quantity,
+      beverageId : item.beverage_id || null,
+      essentialId : item.essential_id || null
     }));
 
     try {
@@ -71,38 +72,46 @@ function ViewCart({ user, onOrder }) {
   };
 
   return (
-    <div className="view_cart_container">
-      <h2>Kosár tartalma</h2>
-      <table className="cart_table">
-        <thead>
-          <tr>
-            <th>Név</th>
-            <th>Ár</th>
-            <th>Mennyiség</th>
-            <th>Összesen</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cartItems.map((item, idx) => (
-            <tr key={idx}>
-              <td>{item.name}</td>
-              <td>${item.price}</td>
-              <td>{item.quantity}</td>
-              <td>${(item.price * item.quantity).toFixed(2)}</td>
+    <div className='cart_overlay' onClick={onClose}>
+      <div className="view_cart_container" onClick={(e) => e.stopPropagation()}>
+        <h2 className='view_cart_title'>Kosár tartalma</h2>
+        <table className="cart_table table table-bordered table-striped">
+          <thead className="text-black justify-content-center">
+            <tr>
+              <th>Név</th>
+              <th>Ár</th>
+              <th>Mennyiség</th>
+              <th>Összesen</th>
             </tr>
-          ))}
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colSpan="3"><strong>Összesen:</strong></td>
-            <td><strong>${totalPrice.toFixed(2)}</strong></td>
-          </tr>
-        </tfoot>
-      </table>
-
-      <button className="order-btn" onClick={handleOrder}>
-        Order
-      </button>
+          </thead>
+          <tbody>
+            {cartItems.map((item, idx) => (
+              <tr key={idx}>
+                <td>{item.name}</td>
+                <td>${item.price}</td>
+                <td>{item.quantity}</td>
+                <td>${(item.price * item.quantity).toFixed(2)}</td>
+              </tr>
+            ))}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colSpan="3"><strong>Összesen:</strong></td>
+              <td><strong>${totalPrice.toFixed(2)}</strong></td>
+            </tr>
+          </tfoot>
+        </table>
+  
+        <div className='cart_buttons'>
+          <button className="order_btn" onClick={handleOrder}>
+            Order
+          </button>
+    
+          <button className="cancel_btn" onClick={onClose}>
+            Cancel
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

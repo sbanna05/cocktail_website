@@ -210,7 +210,7 @@ button:active {
 }
 
 .container {
-  width: 100%;
+  width: 100vw;
   max-width: 2000px;
   margin-block: var(--mb-1-25);
 }
@@ -619,13 +619,13 @@ button:active {
 }
 
 /*============= FAVOURITE SECTION================*/
-
+/*
 .fav_section_container, .signatures_section_container {
   padding-block-start: calc(var(--header-height) + 2rem);
   background-color: var(--deep-ruby);
   padding: 1.5rem 1.5rem;
   height: calc(60vh - var(--header-height));
-  /*border-block: var(--accent-color) 2px solid;*/
+  border-block: var(--accent-color) 2px solid;
   padding-block-end: 3rem;
   box-shadow: #2c2c2d 0px 4px 8px;
 }
@@ -633,7 +633,7 @@ button:active {
 #signatures {
 margin-block: var(--header-height);
 }
-
+*/
 .fav_title, .signatures_title {
   font-size: var(--h1-font-size);
   font-weight: var(--font-semi-bold);
@@ -771,23 +771,6 @@ margin-block: var(--header-height);
   border-radius: 4px;
 }
 
-
-.favourites_swiper,
-.signatures_swiper {
-  width: 80%;
-  padding-block: 1rem;
-}
-
-.swiper-wrapper {
-  display: flex;
-  align-items: center;
-  overflow: visible;
-}
-
-.swiper-slide {
-  flex-shrink: 0;
-  width: auto;
-}
 
 /*============= CONTACT US ================*/
 .contact-us_container {

@@ -16,7 +16,21 @@ function App() {
 
   const handleLogin = (userData) => setUser(userData);
 
-  const handleAddToCart = () => setCartCount(prev => prev + 1); // ez növeli a számlálót
+  const handleAddToCart = async (itemData) => {
+    try {
+      // Backend logika, pl. POST /api/cart
+      await fetch('http://localhost:5000/api/cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: user.userId, ...itemData }) // vagy a megfelelő adat
+      });
+
+      // Frissítjük a kosár számlálót a backend alapján
+      fetchCartCount();
+    } catch (err) {
+      console.error("Hiba kosár hozzáadásnál:", err);
+    }
+  };
 
   const handleOrder = () =>{
     setCartCount(0);
@@ -24,11 +38,12 @@ function App() {
     alert("Rendelés sikeresen leadva!")
   }
 
-  const fetchCartCount = async (userId) => {
+  const fetchCartCount = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/cart/${userId}`);
+      const res = await fetch(`http://localhost:5000/api/cart/${user.userId}`);
       const data = await res.json();
-      const itemsArray = Array.isArray(data.items) ? data.items : [data.items];
+      console.log("items:", data)
+      const itemsArray = Array.isArray(data.orderItems) ? data.orderItems : [data.orderItems];
       const count = itemsArray.reduce((acc, item) => acc + item.quantity, 0);
       setCartCount(count);
     } catch (err) {
@@ -45,7 +60,7 @@ function App() {
     <Router>
       <Header user={user} onLogin={handleLogin} cartCount={cartCount} setShowCart={setShowCart}/>
 
-      {showCart && <ViewCart user={user} onOrder={handleOrder} />}
+      {showCart && <ViewCart user={user} onOrder={handleOrder} onClose={() => setShowCart(false)} />}
 
        <main>
           <Routes>
