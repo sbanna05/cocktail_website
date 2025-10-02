@@ -1,6 +1,21 @@
 import React from 'react';
 
-function Contact() {
+function Contact({onSubmit}) {
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    const messageData = {
+      sender_name: formData.get("name"),
+      sender_email: formData.get("email"),
+      sender_phone: formData.get("phone"),
+      message: formData.get("message"),
+    }
+    onSubmit(messageData);
+    e.target.reset();
+  }
+
   return (
     <section id="contact-us" className="container contact-us_container grid">
       <div className="contact-us_title section_title">
@@ -20,26 +35,30 @@ function Contact() {
         If you have any questions or feedback, feel free to reach out to us!
       </p>
 
-      <form className="contact-us_form">
+      <form className="contact-us_form" onSubmit={handleFormSubmit}>
         <input
           type="text"
+          name="name"
           className="contact-us_input"
           placeholder="Your Name"
           required
         />
         <input
           type="email"
+          name="email"
           className="contact-us_input"
           placeholder="Your Email"
           required
         />
         <input
           type="tel"
+          name="phone"
           className="contact-us_input"
           placeholder="Your Phone Number"
           required
         />
         <textarea
+          name="message"
           className="contact-us_textarea"
           placeholder="Your Message"
           required

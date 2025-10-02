@@ -234,5 +234,23 @@ app.post('/api/orders', async (req, res) => {
 });
 
 
+app.post("/api/contact" , async(req, res) =>{
+    const {sender_name, sender_email, sender_phone, message} = req.body;
+    if (!sender_name || !sender_email || !sender_phone || !message) {
+    return res.status(400).json({ error: "Hiányzó adatok a küldéshez" });
+  }
+  try {
+    const result = await db.query("Insert into messages(sender_name, sender_email, sender_phone, message) values(?,?,?,?)",
+        [sender_name, sender_email, sender_phone, message])
+    const messageId = result.insertId;
+    res.json({ message: 'Üzenet elküldve', messageId });
+    
+  } catch (err) {
+    console.log(err.message)
+    res.status(500).json({ error: "Adatbázis hiba" });
+  }
+})
+
+
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server fut a ${PORT} porton`))

@@ -8,6 +8,20 @@ import Contact from './Contact'
 
 
 function Home() {
+
+  const handleSubmit = async(messageData) => {
+    try {
+      await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(messageData)
+      });
+    } catch (err) {
+      console.log("hiba az elküldésnél:", err)
+    }
+  }
+
+
   return (
     <>
       <section id="home">
@@ -53,7 +67,7 @@ function Home() {
       <Favourites/>
       <Signatures/>
       <Shop/>
-      <Contact/>
+      <Contact onSubmit={handleSubmit}/>
     </>
 
 
