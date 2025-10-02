@@ -132,7 +132,6 @@
   margin: 0;
 }
 
-
 html {
   scroll-behavior: smooth;
 }
@@ -230,7 +229,6 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2rem;
   height: var(--header-height);
   background-color: var(--card-bg);
   box-shadow: 0 4px 8px #2c2c2d;
@@ -980,6 +978,72 @@ margin-block: var(--header-height);
   }
 }
 
+/*===================== RECIPES SECTION==========================77*/
+.recipes_section_container{
+  margin-block: var(--mb-1-25);
+  width: 100vw;
+  color: var(--grey-color);
+
+}
+
+.recipes_section_container .section_title{
+  margin-bottom: var(--mb-2);
+  text-align: center;
+}
+
+.basic_cocktails, .signature_cocktails{
+  padding: var(--mb-2) var(--mb-1-5);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-block: var(--mb-1-5);
+}
+
+.basic_cocktails{
+  background-color: var(--dark-ruby);
+}
+
+.recipe_card{
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius-card);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--box-shadow);
+  transition: transfom 0.3s;
+}
+
+.recipe_card:hover{
+  transform: translateY(-5px);
+}
+
+.recipe_image{
+  /*width: 100%;*/
+  max-width: 180px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: var(--border-radius-card);
+  margin-bottom: var(--mb-0-75);
+}
+.recipe_title{
+  font-size: var(--h2-font-size);
+  margin-bottom: var(--mb-0-5);
+  text-align: center;
+}
+
+.recipe_description {
+  font-size: var(--small-font-size);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.recipe_ingredients_list {
+  list-style: disc;
+  padding-left: 1.25rem;
+  font-size: var(--smaller-font-size);
+}
+
 /*============  SCROLL UP ==================*/
 .scrollup {
   position: fixed;
@@ -1092,7 +1156,7 @@ margin-block: var(--header-height);
   text-align: center;
   position: relative;
   bottom: 0;
-  width: 100%;
+  width: 100vw;
   max-width: 2000px;
 }
 

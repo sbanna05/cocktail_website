@@ -48,10 +48,10 @@ const [searchTerm, setSearchTerm] = useState("");
 
       <div className="beverages">
         <h2 className="section_subtitle">Beverages</h2>
-        <div className="alcoholic_drinks drink_cards_container">
+        <div className="drink_cards_container">
           {filteredDrinks.map((drink, idx) => (
             <div className="drink_card" key={idx}>
-              <img src={`/assets/images/${drink.img}`} alt={drink.name} className="drink_img"/>
+              <img src={`/images/tools/${drink.image}`} alt={drink.name} className="drink_img"/>
               <div className="drink_info">
                 <h3 className="drink_name">{drink.name}</h3>
                 <p className="drink_price">{drink.price}$</p>
@@ -69,7 +69,7 @@ const [searchTerm, setSearchTerm] = useState("");
         <div className="bar_tools_container">
           {filteredEssentials.map((tool, idx) => (
             <div className="tool_card" key={idx}>
-              <img src={`/assets/images/${tool.img}`} alt={tool.name} className="tool_img"/>
+              <img src={`/images/tools/${tool.image}`} alt={tool.name} className="tool_img"/>
               <div className="tool_info">
                 <h3 className="tool_name">{tool.name}</h3>
                 <p className="tool_price">{tool.price}$</p>
