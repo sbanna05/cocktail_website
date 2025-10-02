@@ -278,11 +278,12 @@ main {
 
 .shop_actions {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    flex-wrap: wrap;
+    flex-shrink: 0; /* ne zsugorodjon túl kicsire */
 }
+
+
 
 .nav_cart, .nav_profile {
     position: relative;
@@ -291,6 +292,7 @@ main {
     color: var(--grey-color);
     transition: color 0.3s;
     cursor: pointer;
+    flex-shrink: 0;
 }
 .nav_cart:hover, .nav_profile:hover {
     color: var(--white-color);
@@ -535,6 +537,11 @@ main {
   display: block;
 }
 
+ .shop_actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 }
 
 .show-menu {
