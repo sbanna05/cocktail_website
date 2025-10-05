@@ -62,7 +62,9 @@ function App() {
       <Header user={user} onLogin={handleLogin} cartCount={cartCount} setShowCart={setShowCart}/>
       <ScrollHandler/>
       
-      {showCart && <ViewCart user={user} onOrder={handleOrder} onClose={() => setShowCart(false)} />}
+      {showCart && <ViewCart user={user} onOrder={handleOrder}
+      onClose={() => setShowCart(false)}
+      onUpdateCart={fetchCartCount} />}
 
        <main>
           <Routes>

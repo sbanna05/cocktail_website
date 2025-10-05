@@ -196,6 +196,25 @@ app.get('/api/cart/:userId', async (req, res) => {
     }
 })
 
+app.delete('/api/cart/:userId/item/:itemId', async (req, res) => {
+    const { userId, itemId } = req.params;
+    try {
+        const carts = await db.query("Select * from carts where user_id = ?", [userId]);
+        if (!carts.length) return res.status(404).json({ error: "Nincs kosár ehhez a felhasználóhoz" });
+        const cartId = carts[0].id;
+
+        const result = await db.query("DELETE FROM cart_items WHERE id = ? AND cart_id = ?", [itemId, cartId]);
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: "Nincs ilyen tétel a kosárban" });
+        }
+        res.json({ message: "Tétel törölve a kosárból" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Hiba a tétel törlésekor" });
+    }
+});
+
+
 app.post('/api/orders', async (req, res) => {
     const { userId, orderItems, total } = req.body;
     if (!userId || !orderItems || !Array.isArray(orderItems) || orderItems.length === 0) {
