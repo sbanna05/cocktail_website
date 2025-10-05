@@ -98,19 +98,24 @@
   --small-font-size: .9rem;
   --smaller-font-size: .75rem;
 
-  .sign_in_title, .sign_up_title, sign_in_info, .sign_up_info {
+}
+
+.accessible-theme .sign_in_title,
+.accessible-theme .sign_up_title,
+.accessible-theme .sign_in_info,
+.accessible-theme .sign_up_info {
     font-size: var(--h1-font-size);
     color: var(--white-color);
   }
-  .sign_in_info, .sign_up_info{
+ .accessible-theme .sign_in_info,.accessible-theme .sign_up_info{
     font-size: var(--h2-font-size);
 }
 
-  .sign_in_content, .sign_up_content {
+.accessible-theme .sign_in_content,
+.accessible-theme .sign_up_content {
     background-color: var(--deep-ruby);
     border: var(--accent-color) 2px solid;
   }
-}
 }
 
 @media screen and (min-width: 968px) {
@@ -233,6 +238,7 @@ main {
   background-color: var(--card-bg);
   box-shadow: 0 4px 8px #2c2c2d;
   gap: 1.5rem;
+  padding: 0 var(--mb-1-25);
 }
 .nav_logo, .nav_link, .nav_toggle,
  .nav_dark, .nav_close, .sign_in_icon {
@@ -547,7 +553,6 @@ main {
 }
 
 /*=================================777*/
-/* Overlay háttér */
 .cart_overlay {
   position: fixed;
   top: 0;
@@ -837,7 +842,7 @@ margin-block: var(--header-height);
   color: var(--deep-ruby);
   font-weight: bold;
   font-size: 1.2rem;
-  transform: rotateY(-70deg) scale(3); /* <-- ugyanakkora, de ellentétes */
+  transform: rotateY(-70deg) scale(3);
   transform-origin: bottom left;
   transition: transform 0.8s ease;
 }
@@ -905,15 +910,6 @@ margin-block: var(--header-height);
   flex: 0 0 auto;
 }
 
-/* folyamatos jobbra-balra animáció */
-@keyframes scrollLoop {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
 
 /*=============== SHOP SECTION =====================7*/
 .shop_container{
@@ -1011,7 +1007,7 @@ margin-block: var(--header-height);
   flex-direction: column;
   align-items: center;
   box-shadow: var(--box-shadow);
-  transition: transfom 0.3s;
+  transition: transform 0.3s;
 }
 
 .recipe_card:hover{
@@ -1056,6 +1052,7 @@ margin-block: var(--header-height);
   border-radius: var(--border-radius-small);
   box-shadow:  1px 2px 4px var(--grey-color-dark);
   transition: all .3s ease;
+  z-index: var(--z-modal);
 }
 
 .scrollup i {

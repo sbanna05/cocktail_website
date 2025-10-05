@@ -3,7 +3,6 @@ import RecipeCard from "../components/RecipeCard";
 
 function Recipes({ cocktails, signatures }) {
   return (
-    <>
       <section id="recipes" className="recipes_section_container">
       <h2 className="section_title">Look Up Our Cocktail Recipes</h2>
        <div className="basic_cocktails">
@@ -26,7 +25,6 @@ function Recipes({ cocktails, signatures }) {
         ))}
        </div>
       </section>
-    </>
   );
 }
 

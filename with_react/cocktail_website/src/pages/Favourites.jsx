@@ -58,7 +58,7 @@ const formatted = favourites.map(c => ({
   }, []);
 
   return (
-    <section className="fav_section_container" id="favourites">
+    <section className="fav_section_container" id="favorites">
       <h2 className="fav_title">This Week's Favourites</h2>
       <div className="carousel_loop">
         <div className="carousel_track" ref={trackRef}>

@@ -31,14 +31,14 @@ function Header({ user, onLogin, cartCount, setShowCart }) {
     };
 
     return (
-        <section className={`header`}>
+        <section className="header">
             <nav className="nav">
                 <a href="/#home" className="nav_logo">CocktailHeaven</a>
 
                 <div className={`nav_menu ${menuOpen ? 'show-menu' : ''}`}>
                     <ul className="nav_list">
                         <li className="nav_item"><a href="/#home" className="nav_link">Home</a></li>
-                        <li className="nav_item"><a href="/#favourites" className="nav_link">Favourites</a></li>
+                        <li className="nav_item"><a href="/#favorites" className="nav_link">Favorites</a></li>
                         <li className="nav_item"><a href="/#signatures" className="nav_link">Signature Drinks</a></li>
                         <li className="nav_item"><a href="/#shop" className="nav_link">Shop</a></li>
                         <li className="nav_item"><a href="/#recipes" className="nav_link">Recipes</a></li>

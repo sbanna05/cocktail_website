@@ -10,19 +10,19 @@ export default function Footer() {
       <div className="footer_links">
         <ul className="footer_links_list">
           <li className="footer_links_item">
-            <a href="#home" className="footer_links_link">Home</a>
+            <a href="/#home" className="footer_links_link">Home</a>
           </li>
           <li className="footer_links_item">
-            <a href="#favorites" className="footer_links_link">Favourites</a>
+            <a href="/#favorites" className="footer_links_link">Favorites</a>
           </li>
           <li className="footer_links_item">
-            <a href="#signatures" className="footer_links_link">Signature Drinks</a>
+            <a href="/#signatures" className="footer_links_link">Signature Drinks</a>
           </li>
           <li className="footer_links_item">
-            <a href="#shop" className="footer_links_link">Shop</a>
+            <a href="/#shop" className="footer_links_link">Shop</a>
           </li>
           <li className="footer_links_item">
-            <a href="#contact-us" className="footer_links_link">Contact Us</a>
+            <a href="/#contact-us" className="footer_links_link">Contact Us</a>
           </li>
         </ul>
       </div>

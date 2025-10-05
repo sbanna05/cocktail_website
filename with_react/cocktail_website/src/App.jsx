@@ -8,6 +8,7 @@ import ScrollUp from './components/ScrollUp'
 import ViewCart from "./components/ViewCart.jsx";
 import Webshop from './Webshop'
 import 'remixicon/fonts/remixicon.css';
+import ScrollHandler from './components/ScrollHandler.jsx'
 
 function App() {
   const [user, setUser] = useState(null)
@@ -59,7 +60,8 @@ function App() {
   return (    
     <Router>
       <Header user={user} onLogin={handleLogin} cartCount={cartCount} setShowCart={setShowCart}/>
-
+      <ScrollHandler/>
+      
       {showCart && <ViewCart user={user} onOrder={handleOrder} onClose={() => setShowCart(false)} />}
 
        <main>

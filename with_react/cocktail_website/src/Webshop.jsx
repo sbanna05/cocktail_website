@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import {useLocation} from 'react-router-dom'
 import AddToCartButton from './components/AddToCartButton.jsx'
 import './assets/css/shop.css'
 
@@ -19,14 +20,9 @@ const [searchTerm, setSearchTerm] = useState("");
       .catch(err => console.error("Hiba az essentials lekérésnél:", err));
   }, []);
 
-
-  
-
-  const filteredDrinks = beverages.filter(d => 
+  const filteredDrinks = beverages.filter(d =>
     d.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  console.log(filteredDrinks);
 
   const filteredEssentials = essentials.filter(e =>
     e.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -46,7 +42,7 @@ const [searchTerm, setSearchTerm] = useState("");
         </div>
       </div>
 
-      <div className="beverages">
+      <div className="beverages" id="beverages">
         <h2 className="section_subtitle">Beverages</h2>
         <div className="drink_cards_container">
           {filteredDrinks.map((drink, idx) => (
@@ -64,7 +60,7 @@ const [searchTerm, setSearchTerm] = useState("");
         </div>
       </div>
 
-      <div className="essentials">
+      <div className="essentials" id="essentials">
         <h2 className="section_subtitle">Bar Essentials</h2>
         <div className="bar_tools_container">
           {filteredEssentials.map((tool, idx) => (
