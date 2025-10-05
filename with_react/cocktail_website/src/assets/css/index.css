@@ -88,16 +88,6 @@
   --grey-color-dark: #333030;
   --box-shadow: none;
 
-
-  --biggest-font-size: 3.5rem;
-  --bigger-font-size: 2.5rem;
-  --h1-font-size: 1.75rem;
-  --h2-font-size: 1.5rem;
-  --h3-font-size: 1.25rem;
-  --normal-font-size: 1rem;
-  --small-font-size: .9rem;
-  --smaller-font-size: .75rem;
-
 }
 
 .accessible-theme .sign_in_title,
@@ -128,7 +118,18 @@
     --small-font-size: .875rem;
     --smaller-font-size: .810rem;
   }
+
+  .accessible-theme {
+    --biggest-font-size: 4.5rem;
+    --h1-font-size: 2.75rem;
+    --h2-font-size: 2rem;
+    --h3-font-size: 1.5rem;
+    --normal-font-size: 1.3rem;
+    --small-font-size: 1rem;
+    --smaller-font-size: .9rem;
+  }
 }
+
 
 /*=============== BASE ===============*/
 * {
@@ -234,11 +235,12 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: var(--header-height);
+  min-height: var(--header-height);
   background-color: var(--card-bg);
   box-shadow: 0 4px 8px #2c2c2d;
   gap: 1.5rem;
   padding: 0 var(--mb-1-25);
+  flex-wrap: wrap;
 }
 .nav_logo, .nav_link, .nav_toggle,
  .nav_dark, .nav_close, .sign_in_icon {
@@ -278,16 +280,14 @@ main {
   align-items: center;
 }
 
-
-
 .shop_actions {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    flex-shrink: 0; /* ne zsugorodjon túl kicsire */
+    justify-content: flex-end;
+    gap: var(--mb-0-75);
+    flex-wrap: wrap;
+    flex-shrink: 1; /* ne zsugorodjon túl kicsire */
 }
-
-
 
 .nav_cart, .nav_profile {
     position: relative;
@@ -484,24 +484,23 @@ main {
   }
 }
 
-/* ===== Mobil nézet: max 568px ===== */
 @media screen and (max-width: 765px) {
   .nav_menu {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 50%;
+    width: 80%; /* alapértelmezett mobilon */
+    max-width: 400px;
     height: 100vh;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     padding: 3rem 2rem;
     background-color: hsla(348, 74%, 22%, 0.8);
-   /* backdrop-filter: blur(4px);*/
-    gap: 2rem;
     transition: all 0.4s ease;
     z-index: var(--z-fixed);
-  }
+}
+
   .nav_toggle, .nav_close, .change_theme_name, .sign_in_name {
     display: inline-block;
   }
@@ -544,7 +543,8 @@ main {
  .shop_actions {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
+    font-size: var(--small-font-size);
+    gap: var(--mb-1-5);
   }
 }
 
@@ -829,11 +829,6 @@ margin-block: var(--header-height);
   visibility: visible;
   transform: translateY(30%);
 }
-/*
-.card:hover .card_title {
-  transform: translateY(-10px)  scale(1.5);
-  z-index: 5;
-}*/
 
 .cocktail_card:hover .card_title {
   position: absolute;

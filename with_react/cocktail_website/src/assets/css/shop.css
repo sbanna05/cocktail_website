@@ -29,16 +29,25 @@
     gap: 1rem;
 }
 
+.dark-theme .search_bar {
+    color: var(--white-color);
+}
+
+.dark-theme .search_input {
+    background-color: var(--grey-color);
+    color: var(--white-color);
+    border: 1px solid var(--card-accent);
+}
+
 .search_bar {
     display: flex;
     align-items: center;
     gap: 1rem;
     max-width: 1200px;
     background: var(--white-color);
-    color: aliceblue;
     padding: 0.7rem 1rem;
     border-radius: 0.7rem;
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.4);
 }
 
 .search_input {
