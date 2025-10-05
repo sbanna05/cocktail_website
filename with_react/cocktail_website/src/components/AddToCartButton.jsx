@@ -13,22 +13,17 @@ function AddToCartButton({ user, productId, type, onAdd }) {
       if(type === 'beverage') body.beverageId = productId;
       else if(type === 'essential') body.essentialId = productId;
 
+      const token = localStorage.getItem("token");
       const res = await fetch('http://localhost:5000/api/cart', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json',
+          "Authorization": `Bearer ${token}`
+        },
         body: JSON.stringify(body)
       });
 
-   /*   const updateCartCount = async (userId) => {
-  const res = await fetch(`http://localhost:5000/api/cart/${userId}`);
-  const data = await res.json();
-  const count = data.reduce((acc, item) => acc + item.quantity, 0);
-  setCartCount(count);
-};*/
-
-
       const data = await res.json();
-      console.log("cart:", data)
+      //console.log("cart:", data)
       if(res.ok){
         alert('Hozzáadva a kosárhoz!');
         onAdd();

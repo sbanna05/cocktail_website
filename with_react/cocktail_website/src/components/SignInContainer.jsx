@@ -13,9 +13,12 @@ function SignInContainer({ active, close, switchToSignUp, onLogin }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem("token");
       const res = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+         },
         body: JSON.stringify(userdata),
       });
 
@@ -23,7 +26,7 @@ function SignInContainer({ active, close, switchToSignUp, onLogin }) {
       console.log(data)
 
       if (res.ok) {
-        onLogin({ userId: data.userId, username: userdata.username });
+        onLogin(userdata);
         close();
       } else {
         alert(data.error);

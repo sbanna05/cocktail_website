@@ -3,7 +3,7 @@ import SignInContainer from './SignInContainer.jsx';
 import SignUpContainer from './SignUpContainer.jsx';
 
 
-function Header({ user, onLogin, cartCount, setShowCart }) {
+function Header({ user, onLogin, onLogout, cartCount, setShowCart }) {
     const [menuOpen, setMenuOpen] = useState(false);
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
     const [showSignIn, setShowSignIn] = useState(false);
@@ -12,12 +12,13 @@ function Header({ user, onLogin, cartCount, setShowCart }) {
     const toggleMenu = () => setMenuOpen(!menuOpen);
 
     const handleLogout = () => {
-        onLogin(null);
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        if (onLogout) onLogout();
     };
 
-    console.log(user)
-    console.log(onLogin)
-
+    //console.log("user:",user)
+   //console.log("onlogin:",onLogin)
 
     const toggleTheme = () => {
         const themes = ['light', 'dark', 'accessible'];
@@ -25,7 +26,6 @@ function Header({ user, onLogin, cartCount, setShowCart }) {
         setTheme(nextTheme);
         localStorage.setItem('theme', nextTheme);
 
-        // Alkalmazzuk a <html> elemre
         document.body.classList.remove('light-theme', 'dark-theme', 'accessible-theme');
         document.body.classList.add(`${nextTheme}-theme`);
     };

@@ -9,8 +9,11 @@ function ViewCart({ user, onOrder, onClose, onUpdateCart }) {
 
     const fetchCart = async () => {
       try {
+        const token = localStorage.getItem("token");
         const res = await fetch(
-          `http://localhost:5000/api/cart/${user.userId}`
+          `http://localhost:5000/api/cart`,{
+            headers: { "Authorization": `Bearer ${token}` },
+          }
         );
         const data = await res.json();
         console.log("items:", data);
@@ -54,11 +57,13 @@ function ViewCart({ user, onOrder, onClose, onUpdateCart }) {
     }));
 
     try {
+      const token = localStorage.getItem("token");
       const res = await fetch("http://localhost:5000/api/orders", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
         body: JSON.stringify({
-          userId: user.userId,
           total: totalPrice,
           orderItems: orderItems,
         }),
@@ -84,9 +89,11 @@ function ViewCart({ user, onOrder, onClose, onUpdateCart }) {
       )) return;
 
     try {
+      const token = localStorage.getItem("token");
       const res = await fetch(
-        `http://localhost:5000/api/cart/${user.userId}/item/${item.id}`,{
-          method: "DELETE"
+        `http://localhost:5000/api/cart/item/${item.id}`,{
+          method: "DELETE",
+          headers: { "Authorization": `Bearer ${token}` },
         });
         
       const data = await res.json();

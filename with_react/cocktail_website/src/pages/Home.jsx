@@ -28,7 +28,7 @@ function Home() {
     try {
       const res = await fetch('http://localhost:5000/api/cocktails');
       const data = await res.json();
-      console.log("cocktials:", data)
+      //console.log("cocktials:", data)
       setCocktails(data)
     } catch (err) {
       console.error("lekérésnél hiba:", err)
@@ -40,7 +40,6 @@ function Home() {
     try {
       const res = await fetch('http://localhost:5000/api/signatures');
       const data = await res.json();
-      console.log("signs:", data)
       setSignatures(data)
     } catch (err) {
       console.error("lekérésnél hiba:", err)

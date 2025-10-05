@@ -20,7 +20,7 @@ function Recipes({ cocktails, signatures }) {
 
        <div className="signature_cocktails">
         {signatures.map((s, idx) =>(
-          <RecipeCard id={idx} title={s.name} description={s.description}
+          <RecipeCard id={s + idx} title={s.name} description={s.description}
           image={`/images/${s.image}`} ingredients={s.ingredients}/>
         ))}
        </div>
