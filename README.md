@@ -46,7 +46,10 @@ The website supports three themes using CSS custom properties (--variable-name) 
 
 - Adjusted box shadows and text colors for visibility.
 
-- Example colors: --body-color: #342121, --card-bg: hsl(350, 80%, 20%).
+- Example colors:
+  ```css
+  --body-color: #342121, --card-bg: hsl(350, 80%, 20%)
+  ```
 
 ### Accessible Theme
 
@@ -58,9 +61,14 @@ The website supports three themes using CSS custom properties (--variable-name) 
 
 - Adjusted inputs, buttons, and modal containers to match accessible color standards.
 
-- Example colors: --body-color: #2e2525, --card-bg: #371d1d, --accent-color: #00ffff.
+- Example colors:
+```css--body-color: #2e2525, --card-bg: #371d1d, --accent-color: #00ffff
+```
 
-- Font sizes are scaled up: --biggest-font-size: 3.5rem, --h1-font-size: 1.75rem.
+- Font sizes are scaled up:
+```css
+--biggest-font-size: 3.5rem, --h1-font-size: 1.75rem
+```
 
 ## For tablet and mobile users (< 756px)
 
@@ -74,7 +82,7 @@ The website supports three themes using CSS custom properties (--variable-name) 
 
 <img width="541" height="725" alt="mobile" src="https://github.com/user-attachments/assets/6d731e27-08c9-4941-ade6-86d7b0d7d135" />
 
-## 🧩 UI Components
+## UI Components
 
 ### Header & Navigation
 
@@ -88,18 +96,35 @@ The website supports three themes using CSS custom properties (--variable-name) 
 - Inputs use accessible variables for font size and contrast.
 - Buttons highlight on hover with subtle animations.
 
+<img width="1518" height="812" alt="signup" src="https://github.com/user-attachments/assets/ad1683e6-d20d-45c7-9dd4-25a2b160db21" />
+  
 ### Shop / Cart
 
 - Shopping cart icon with counter.
 - Profile dropdown for logged-in users.
 - Responsive layout ensures accessibility on mobile.
+  
+<img width="914" height="688" alt="viewcart" src="https://github.com/user-attachments/assets/2b8459ed-7135-4a57-9038-6ca75a2ff996" />
 
 ### Cocktail Cards
 
 - Color-coded cards depending on theme.
 - Shadows, border-radius, and accent borders enhance visual hierarchy.
 - High-contrast colors in accessible mode for readability.
+  
+<img width="1919" height="848" alt="cocktails" src="https://github.com/user-attachments/assets/8db07251-0432-48bd-976e-e1a1269e785b" />
 
+
+### Favourites & Signature Cocktails
+
+- loop effect with different cocktail cards
+- On hover effect for modern design
+  
+<img width="1919" height="842" alt="scroll" src="https://github.com/user-attachments/assets/1f9dc3bd-c67b-4202-922d-50126069c205" />
+<img width="767" height="509" alt="onhover" src="https://github.com/user-attachments/assets/fbf42c9c-f67b-41b7-b2dc-bcd536742071" />
+
+> **Note that the signature cocktail recipes are indeed my own creations, although not IBA-approved**
+  
 ---
 
 ## CSS Structure
@@ -118,3 +143,175 @@ The website supports three themes using CSS custom properties (--variable-name) 
 - Keyboard-friendly navigation (tab-focus visible).
 - Hover & focus effects retained for visual cues.
 - ARIA attributes can be added to enhance screen reader support.
+
+---
+
+## BACKEND: Express and node js
+
+### CRUD
+
+  -**CREATE**:
+    - user login
+    - cart creation
+    - adding cart items
+    - placing order
+    - sending message
+  -**READ**:
+    - fetch user info
+    - cart items,
+    - cocktail and signatures list,
+    - cartItemsCount
+  -**UPDATE**:
+    -cartItemsCount is refresed after adding/deleting, CartList is updated
+    -After placing order, beverages/essentials table stock column is updated with `stock - itemQuantity`
+  -**DELETE**: delete cart items
+
+<img width="1207" height="646" alt="database" src="https://github.com/user-attachments/assets/7269aedb-d744-416f-bd33-01d513fd41fc" />
+
+---
+
+#### Database configuration
+
+```js
+const db = await mariadb.createPool({
+    host: 'localhost',
+     user: 'YOUR_USER_NAME',
+    password: 'YOUR_PASSWORD',
+    database: 'YOUR_DATABASE_NAME'
+})
+```
+
+#### Example code for api calls from `server.js`
+
+```javascript
+app.post('/api/cart', async (req, res) => {
+    const { userId, quantity, beverageId, essentialId } = req.body;
+    if (!userId) {
+        return res.status(400).json({ error: 'Hiányzó adatok' });
+    }
+    try {
+        let carts = await db.query("Select * from carts where user_id = ?", [userId]);
+        let cartId;
+
+        if (carts.length === 0) {
+            let result = await db.query("insert into carts (user_id) values (?)", [userId]);
+            cartId = result.insertId;
+        } else cartId = carts[0].id
+
+        let sql = `select * from cart_items
+                where cart_id = ?`;
+        let params;
+        if (beverageId) {
+            sql += " and beverage_id = ?;";
+            params = [cartId, beverageId];
+        } else if (essentialId) {
+            sql += " and essential_id = ?;";
+            params = [cartId, essentialId];
+        } else {
+            return res.status(400).json({ error: "Hiányzó termék ID" });
+        }
+        console.log(sql)
+
+        let items = await db.query(sql, params)
+        console.log("cartitems:", items)
+
+        if (items.length > 0) {
+            await db.query(`update cart_items Set quantity = quantity + ?
+                    Where id = ?`,
+                [quantity || 1, items[0].id])
+        } else {
+            await db.query(`INSERT INTO cart_items
+                 (cart_id, beverage_id, essential_id, quantity) VALUES (?, ?, ?, ?)`,
+                [cartId, beverageId || null, essentialId || null, quantity || 1]
+            );
+        }
+
+        res.json({ message: "Hozzáadva a kosárhoz!", cartId });
+    } catch (err) {
+        res.status(500).json({ error: 'Adatbázis hiba' });
+    }
+});
+
+app.get('/api/cart/:userId', async (req, res) => {
+    const userId = req.params.userId;
+    try {
+        const carts = await db.query("Select * from carts where user_id = ?", [userId])
+        if (!carts.length) return res.json({ items: [] });
+
+        const cartId = carts[0].id;
+
+        const orderItems = await db.query(`
+            SELECT ci.id, ci.quantity, 
+                    ci.beverage_id, 
+                    ci.essential_id,
+                    COALESCE(b.name, e.name) AS name,
+                    COALESCE(b.price, e.price) AS price
+            FROM cart_items ci
+            LEFT JOIN beverages b ON ci.beverage_id = b.id
+            LEFT JOIN essentials e ON ci.essential_id = e.id
+            WHERE ci.cart_id = ?
+         `, [cartId]);
+
+        res.json({ orderItems })
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ error: 'Hiba a kosár lekéréséhez.' })
+    }
+})
+
+app.delete('/api/cart/:userId/item/:itemId', async (req, res) => {
+    const { userId, itemId } = req.params;
+    try {
+        const carts = await db.query("Select * from carts where user_id = ?", [userId]);
+        if (!carts.length) return res.status(404).json({ error: "Nincs kosár ehhez a felhasználóhoz" });
+        const cartId = carts[0].id;
+
+        const result = await db.query("DELETE FROM cart_items WHERE id = ? AND cart_id = ?", [itemId, cartId]);
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: "Nincs ilyen tétel a kosárban" });
+        }
+        res.json({ message: "Tétel törölve a kosárból" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Hiba a tétel törlésekor" });
+    }
+});
+
+app.post('/api/orders', async (req, res) => {
+    const { userId, orderItems, total } = req.body;
+    if (!userId || !orderItems || !Array.isArray(orderItems) || orderItems.length === 0) {
+    return res.status(400).json({ error: "Hiányzó adatok a rendeléshez" });
+  }
+  console.log("orderItems:", orderItems)
+
+    try {
+        const orderItemsJSON = JSON.stringify(orderItems || req.body.orderItems);
+        const result = await db.query("insert into orders (user_id, total, order_items) values (?,?,?)",
+            [userId, total, orderItemsJSON]
+        )
+        const orderId = result.insertId
+
+        //stock frissítés
+        for(let item of orderItems){
+            if(item.beverageId){
+                await db.query("update beverages set stock = stock - ? where name = ? and stock >= ?"
+                    ,[item.quantity, item.name, item.quantity]
+                )
+            }
+            if(item.essentialId){
+                await db.query("update essentials set stock = stock - ? where name = ? and stock >= ?"
+                    ,[item.quantity, item.name, item.quantity]
+                )
+            }
+        }empty cart
+        await db.query("DELETE FROM cart_items WHERE cart_id = (SELECT id FROM carts WHERE user_id = ?)", [userId]);
+
+        res.json({ message: 'Rendelés létrehozva', orderId });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Hiba a rendelés mentésekor' });
+    }
+});
+```
+
+
