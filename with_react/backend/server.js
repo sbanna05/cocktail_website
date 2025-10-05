@@ -17,12 +17,12 @@ app.use((req, res, next) => {
   next();
 });
 
-//adatbázis
+//database connection
 const db = await mariadb.createPool({
     host: 'localhost',
-    user: 'root',
-    password: 'root1234',
-    database: 'cocktailheaven'
+    user: '',
+    password: '',
+    database: ''
 })
 
 app.get('/api/cocktails', async (req, res) => {

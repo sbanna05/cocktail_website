@@ -47,7 +47,8 @@ The website supports three themes using CSS custom properties (--variable-name) 
 - Adjusted box shadows and text colors for visibility.
 
 - Example colors:
-  ```css
+
+```css
   --body-color: #342121, --card-bg: hsl(350, 80%, 20%)
   ```
 
@@ -62,10 +63,13 @@ The website supports three themes using CSS custom properties (--variable-name) 
 - Adjusted inputs, buttons, and modal containers to match accessible color standards.
 
 - Example colors:
-```css--body-color: #2e2525, --card-bg: #371d1d, --accent-color: #00ffff
+
+```css
+--body-color: #2e2525, --card-bg: #371d1d, --accent-color: #00ffff
 ```
 
 - Font sizes are scaled up:
+
 ```css
 --biggest-font-size: 3.5rem, --h1-font-size: 1.75rem
 ```
@@ -101,7 +105,6 @@ The website supports three themes using CSS custom properties (--variable-name) 
 ### Shop / Cart
 
 - Shopping cart icon with counter.
-- Profile dropdown for logged-in users.
 - Responsive layout ensures accessibility on mobile.
   
 <img width="914" height="688" alt="viewcart" src="https://github.com/user-attachments/assets/2b8459ed-7135-4a57-9038-6ca75a2ff996" />
@@ -114,17 +117,17 @@ The website supports three themes using CSS custom properties (--variable-name) 
   
 <img width="1919" height="848" alt="cocktails" src="https://github.com/user-attachments/assets/8db07251-0432-48bd-976e-e1a1269e785b" />
 
-
 ### Favourites & Signature Cocktails
 
 - loop effect with different cocktail cards
 - On hover effect for modern design
-  
-<img width="1919" height="842" alt="scroll" src="https://github.com/user-attachments/assets/1f9dc3bd-c67b-4202-922d-50126069c205" />
-<img width="767" height="509" alt="onhover" src="https://github.com/user-attachments/assets/fbf42c9c-f67b-41b7-b2dc-bcd536742071" />
 
 > **Note that the signature cocktail recipes are indeed my own creations, although not IBA-approved**
-  
+
+<img width="1919" height="842" alt="scroll" src="https://github.com/user-attachments/assets/1f9dc3bd-c67b-4202-922d-50126069c205" />
+
+<img width="767" height="509" alt="onhover" src="https://github.com/user-attachments/assets/fbf42c9c-f67b-41b7-b2dc-bcd536742071" />
+
 ---
 
 ## CSS Structure
@@ -146,25 +149,31 @@ The website supports three themes using CSS custom properties (--variable-name) 
 
 ---
 
-## BACKEND: Express and node js
+## BACKEND: Express and Node.js
 
 ### CRUD
 
-  -**CREATE**:
-    - user login
-    - cart creation
-    - adding cart items
-    - placing order
-    - sending message
-  -**READ**:
-    - fetch user info
-    - cart items,
-    - cocktail and signatures list,
-    - cartItemsCount
-  -**UPDATE**:
-    -cartItemsCount is refresed after adding/deleting, CartList is updated
-    -After placing order, beverages/essentials table stock column is updated with `stock - itemQuantity`
-  -**DELETE**: delete cart items
+- **CREATE**
+  - User login
+  - Cart creation
+  - Adding cart items
+  - Placing order
+  - Sending message
+
+- **READ**
+  - Fetch user info
+  - Cart items
+  - Cocktail and signatures list
+  - Cart items count
+
+- **UPDATE**
+  - Cart items count is refreshed after adding/deleting items
+  - Cart list is updated
+  - After placing order, update stock in beverages/essentials tables:
+    - `stock = stock - itemQuantity`
+
+- **DELETE**
+  - Delete cart items
 
 <img width="1207" height="646" alt="database" src="https://github.com/user-attachments/assets/7269aedb-d744-416f-bd33-01d513fd41fc" />
 
@@ -313,5 +322,3 @@ app.post('/api/orders', async (req, res) => {
     }
 });
 ```
-
-
