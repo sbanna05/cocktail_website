@@ -181,13 +181,24 @@ The website supports three themes using CSS custom properties (--variable-name) 
 
 #### Database configuration
 
+Create a `.env` file in the `backend` folder where you add your basic database information
+``js
+DB_HOST=localhost
+DB_USER=YOUR_USERNAME
+DB_PASSWORD=YOUR_PASSWORD
+DB_NAME=YOUR_DB_NAME
+``
+
+than in the server.js file:
+
 ```js
 const db = await mariadb.createPool({
-    host: 'localhost',
-     user: 'YOUR_USER_NAME',
-    password: 'YOUR_PASSWORD',
-    database: 'YOUR_DATABASE_NAME'
-})
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    connectionLimit: 5
+});
 ```
 
 #### Example code for api calls from `server.js`
@@ -322,3 +333,26 @@ app.post('/api/orders', async (req, res) => {
     }
 });
 ```
+
+#### How to run the application
+
+clone the project
+``bash
+clone <repository_name>
+cd <working_directory>
+cd ./with_react
+``
+
+##### Frontend
+
+``bash
+cd cocktail_website
+npm run dev
+``
+
+##### Backend
+
+``bash
+cd backend
+node server.js
+``
