@@ -1,7 +1,4 @@
-import React from 'react';
-
-function Contact({onSubmit}) {
-
+function Contact({ onSubmit, user }) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -11,10 +8,10 @@ function Contact({onSubmit}) {
       sender_email: formData.get("email"),
       sender_phone: formData.get("phone"),
       message: formData.get("message"),
-    }
+    };
     onSubmit(messageData);
     e.target.reset();
-  }
+  };
 
   return (
     <section id="contact-us" className="container contact-us_container grid">
@@ -39,6 +36,7 @@ function Contact({onSubmit}) {
         <input
           type="text"
           name="name"
+          defaultValue={user ? user.username : ""}
           className="contact-us_input"
           placeholder="Your Name"
           required
@@ -46,6 +44,7 @@ function Contact({onSubmit}) {
         <input
           type="email"
           name="email"
+          defaultValue={user ? user.email : ""}
           className="contact-us_input"
           placeholder="Your Email"
           required

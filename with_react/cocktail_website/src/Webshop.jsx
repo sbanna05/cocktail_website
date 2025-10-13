@@ -75,8 +75,6 @@ const [searchTerm, setSearchTerm] = useState("");
           ))}
         </div>
       </div>
-
-      
     </section>
   );
 }

@@ -28,7 +28,7 @@ function App() {
 
       if (res.ok) {
         localStorage.setItem("token", data.token);
-        const loggedUser = { userId: data.user.id, username: data.user.name };
+        const loggedUser = { userId: data.user.id, username: data.user.name, email: data.user.email };
         setUser(loggedUser);
 
         localStorage.setItem("user", JSON.stringify(loggedUser));
@@ -101,7 +101,7 @@ function App() {
 
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home user={user} />} />
           <Route
             path="/webshop"
             element={<Webshop user={user} onAdd={fetchCartCount} />}
