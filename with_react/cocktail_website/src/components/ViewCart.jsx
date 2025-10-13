@@ -114,15 +114,15 @@ function ViewCart({ user, onOrder, onClose, onUpdateCart }) {
   return (
     <div className="cart_overlay" onClick={onClose}>
       <div className="view_cart_container" onClick={(e) => e.stopPropagation()}>
-        <h2 className="view_cart_title">Kosár tartalma</h2>
+        <h2 className="view_cart_title">My Cart</h2>
         <table className="cart_table table table-bordered table-striped">
           <thead className="text-black justify-content-center">
             <tr>
-              <th>Név</th>
-              <th>Ár</th>
-              <th>Mennyiség</th>
-              <th>Összesen</th>
-              <th>Törlés</th>
+              <th>Item</th>
+              <th>Price</th>
+              <th>Amount</th>
+              <th>Total</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -154,7 +154,7 @@ function ViewCart({ user, onOrder, onClose, onUpdateCart }) {
           <tfoot>
             <tr>
               <td colSpan="3">
-                <strong>Összesen:</strong>
+                <strong>Total price:</strong>
               </td>
               <td colSpan={2}>
                 <strong>${totalPrice.toFixed(2)}</strong>

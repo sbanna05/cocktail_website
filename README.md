@@ -182,12 +182,13 @@ The website supports three themes using CSS custom properties (--variable-name) 
 #### Database configuration
 
 Create a `.env` file in the `backend` folder where you add your basic database information
-``js
+
+```js
 DB_HOST=localhost
 DB_USER=YOUR_USERNAME
 DB_PASSWORD=YOUR_PASSWORD
 DB_NAME=YOUR_DB_NAME
-``
+```
 
 than in the server.js file:
 
@@ -334,25 +335,28 @@ app.post('/api/orders', async (req, res) => {
 });
 ```
 
-#### How to run the application
+---
+
+### How to run the application
 
 clone the project
-``bash
+
+```bash
 clone <repository_name>
 cd <working_directory>
 cd ./with_react
-``
+```
 
-##### Frontend
+#### Frontend
 
-``bash
+```bash
 cd cocktail_website
 npm run dev
-``
+```
 
-##### Backend
+### Backend
 
-``bash
+```bash
 cd backend
 node server.js
-``
+```
